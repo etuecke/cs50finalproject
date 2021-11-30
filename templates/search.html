@@ -1,22 +1,39 @@
 {% extends "layout.html" %}
 
 {% block main %}
-
+    <h2>Search by Title</h2>
     <form action="/search" method="post">
-        <div class="mb-3">
+        <div class="input-group mb-3">
             <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="symbol" name="symbol" placeholder="Movie Title" type="text">
+            <div class="input-group-append">
+                <button class="button" type="submit">Search movies</button>
+            </div>
         </div>
-        <button class="btn btn-primary" type="submit">Search movies</button>
     </form>
     <br />
     <br />
-    <div>
-        <h1>Advanced Search</h1>
-        <h3>Title: </h3> 
-        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="symbol" name="symbol" placeholder="Movie Title" type="text">
-        <h3>User rating: </h3>
-        <input class="form-control mx-auto w-auto" id="from" name="from" placeholder="From" type="number">
-        <input class="form-control mx-auto w-auto" id="to" name="to" placeholder="To" type="number">
+    <div class="container">
+        <h2>Advanced Search</h2>
+        <br/>
+        <div class="row">
+            <div class="col-sm">
+                <h4>Title: </h4> 
+                <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="title" name="title" placeholder="Movie Title" type="text">
+                <p>e.g. Interstellar</p> 
+            </div>
+            <div class="col-sm">
+                <h4>User rating: </h4>
+                <input class="form-control mx-auto w-auto" id="from" name="from" placeholder="From" type="number">
+                <input class="form-control mx-auto w-auto" id="to" name="to" placeholder="To" type="number">
+            </div>
+            <div class="col-sm">
+                <h4>Starring </h4>
+                <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="starring" name="starring" placeholder="Starring" type="text">
+                <p>e.g. Timothee Chalamet</p>
+            </div>
+        </div>
+        <br/>
+        <button class="button" type="submit">Search movies</button>
     </div>
 
 {% endblock %}
