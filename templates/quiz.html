@@ -1,7 +1,13 @@
 {% extends "layout.html" %}
 
-{% block body %}
+{% block title %}
+    Quiz
+{% endblock %}
 
-    this is the quiz page
-
+{% block main %}
+    <form action="/quiz" method="post">
+        <div>
+            <p class="mb-3">This is the quiz page!</p>
+        </div>
+    </form>
 {% endblock %}

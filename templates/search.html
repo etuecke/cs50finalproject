@@ -1,7 +1,22 @@
 {% extends "layout.html" %}
 
-{% block body %}
+{% block main %}
 
-    this is the search page
+    <form action="/search" method="post">
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="symbol" name="symbol" placeholder="Movie Title" type="text">
+        </div>
+        <button class="btn btn-primary" type="submit">Search movies</button>
+    </form>
+    <br />
+    <br />
+    <div>
+        <h1>Advanced Search</h1>
+        <h3>Title: </h3> 
+        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="symbol" name="symbol" placeholder="Movie Title" type="text">
+        <h3>User rating: </h3>
+        <input class="form-control mx-auto w-auto" id="from" name="from" placeholder="From" type="number">
+        <input class="form-control mx-auto w-auto" id="to" name="to" placeholder="To" type="number">
+    </div>
 
 {% endblock %}
