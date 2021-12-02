@@ -35,10 +35,10 @@ def after_request(response):
 
 
 #TODO: implement homepage
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 @login_required
 def index():
-    """Show movies I've seen and recommended movies"""
+    """display homepage"""
     return render_template("index.html")
 
 
@@ -135,7 +135,7 @@ def register():
         # Security: database should never store plain text password
         # Security: User generate_password_hash to generate a hash of the password
         password_hash = generate_password_hash(request.form.get("password"))
-        insert = db.execute("INSERT into users(username, hash) VALUES(?,?)", request.form.get("username"), password_hash)
+        db.execute("INSERT into users(username, hash) VALUES(?,?)", request.form.get("username"), password_hash)
 
         # Log user in 
         # session["user_id"] keeps track of which user is logged in
@@ -152,7 +152,7 @@ def quiz():
 
 
 #TODO handle searching movies (use quote() from Finance as a template)
-@app.route("/search")
+@app.route("/search", methods=["GET", "POST"])
 @login_required
 def search():
     """Get search results."""
@@ -162,4 +162,19 @@ def search():
     
     # User reached route via GET (as by clicking a link or via redirect)
     else: 
-        return render_template("quote.html")
+        return render_template("search.html")
+
+#TODO: fetch news 
+@app.route("/news")
+@login_required
+def news():
+    """Get movie news."""
+    return render_template("news.html")
+
+#TODO: fetch random rec (lucky) 
+@app.route("/lucky")
+@login_required
+def lucky():
+    """Get random movie rec."""
+    rows = db.execute("SELECT * FROM movies ORDER BY RAND() LIMIT 1")
+    return render_template("lucky.html")
