@@ -7,7 +7,9 @@
 {% block main %}
     <form action="/lucky" method="post">
         <div>
-            <p class="mb-3">This is the lucky page!</p>
+            <p class="mb-3">{{ lucky.title }}, {{ lucky.year }}</p>
+            <p class="mb-3">Directed by: {{ details.directors }}</p>
+            <p class="mb-3">Starring: {{ details.stars }}</p>
         </div>
     </form>
 {% endblock %}

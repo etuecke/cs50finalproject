@@ -7,8 +7,9 @@ from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
+import random
 
-from helpers import apology, login_required
+from helpers import apology, login_required, get_details
 
 # Configure app
 app = Flask(__name__)
@@ -176,5 +177,6 @@ def news():
 @login_required
 def lucky():
     """Get random movie rec."""
-    rows = db.execute("SELECT * FROM movies ORDER BY RAND() LIMIT 1")
-    return render_template("lucky.html")
+    rows = db.execute("SELECT * FROM movies")
+    random_mov = rows[random.randint(0, len(rows)-1)]
+    return render_template("lucky.html", lucky = random_mov, details = get_details(random_mov["id"]))
