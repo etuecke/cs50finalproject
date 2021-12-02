@@ -19,7 +19,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Configure CS50 Library to use SQLite database
-db = SQL("sqlite:///cinema.db")
+db = SQL("sqlite:///movies.db")
 
 # Make sure API key is set
 if not os.environ.get("API_KEY"):
