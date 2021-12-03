@@ -1,3 +1,7 @@
+import os
+import requests
+import urllib.parse
+
 from flask import redirect, render_template, request, session
 from functools import wraps
 from cs50 import SQL
@@ -62,4 +66,33 @@ def get_details(movie_id):
     details["year"] = year
 
     return details
-    
+
+def get_reviews():
+    """Look up details for reviews."""
+    # Contact API
+    try:
+        api_key = os.environ.get("NYT_KEY")
+        url = f"https://api.nytimes.com/svc/movies/v2/reviews/search.json?&api-key={api_key}"
+        response = requests.get(url)
+        response.raise_for_status()
+    except requests.RequestException:
+        print("there")
+        return None
+
+    # Parse response
+    try:
+        reviews = response.json()
+        return reviews["results"]
+    except (KeyError, TypeError, ValueError):
+        print("here")
+        return None
+
+def get_review_details(review):
+    return {
+        "headline": review["headline"],
+        "byline": review["byline"],
+        "summary": review["summary_short"],
+        "date": review["publication_date"],
+        "link": review["link"]["url"], 
+        "image_url": review["multimedia"]["src"]
+    }

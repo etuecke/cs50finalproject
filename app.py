@@ -9,7 +9,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
 import random
 
-from helpers import apology, login_required, get_details
+from helpers import apology, login_required, get_details, get_reviews, get_review_details
 
 # Configure app
 app = Flask(__name__)
@@ -195,17 +195,22 @@ def search():
             return render_template("searched.html", searched = movies, details = details_list)
 
         # TO DO: searching by ratings
-
+    
     # User reached route via GET (as by clicking a link or via redirect)
     else: 
         return render_template("search.html")
 
 #TODO: fetch news 
-@app.route("/news")
+@app.route("/news", methods=["GET", "POST"])
 @login_required
 def news():
     """Get movie news."""
-    return render_template("news.html")
+    data = get_reviews()
+    reviews = []
+    for review in data:
+        temp = get_review_details(review)
+        reviews.append(temp)
+    return render_template("news.html", reviews=reviews)
 
 #TODO: fetch random rec (lucky) 
 @app.route("/lucky")

@@ -6,16 +6,21 @@
 
 {% block main %}
     <form action="/news" method="post">
-        <div>
-            <p class="mb-3">This is the news page!</p>
-        </div>
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="..." alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Read More</a>
+        <div class="container">
+            {% for review in reviews %}
+            <div class="flex-item">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src={{review.image_url}} alt="Card image cap">
+                    <div class="card-body">
+                    <h5 class="card-title">{{review.headline}}</h5>
+                    <p class="card-text">{{review.byline}}</p>
+                    <p class="card-text">{{review.date}}</p>
+                    <p class="card-text">{{review.summary}}</p>
+                    <a href={{review.link}} class="button">Read More</a>
+                    </div>
+                </div>
             </div>
+        {% endfor %}
         </div>
     </form>
 {% endblock %}
