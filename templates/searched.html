@@ -1,7 +1,24 @@
 {% extends "layout.html" %}
 
 {% block main %}
-
-    this is the searched page (shown after you search a movie)
-
+<form action="/searched" method="post">
+    <div class="mb-3">
+        <table class = "center">
+            <tr>
+                <th>Title</th>
+                <th>Year</th>
+                <th>Directors</th>
+                <th>Stars</th>
+            </tr>
+            {% for movie in searched %}
+                <tr>
+                    <td>{{ movie.title }}</td>
+                    <td>{{ movie.year }}</td>
+                    <td>{{ details[loop.index0].directors }}</td>
+                    <td>{{ details[loop.index0].stars }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</form>
 {% endblock %}

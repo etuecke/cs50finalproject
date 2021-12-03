@@ -159,8 +159,43 @@ def search():
     """Get search results."""
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
-        return render_template("searched.html")
-    
+        
+        # normal searching by title
+        if request.form.get("movie_title"):
+            movie_title = request.form.get("movie_title")
+            movies = db.execute("SELECT * FROM movies WHERE title = ?", movie_title)
+            details_list = []
+            for movie in movies:
+                details_list.append(get_details(movie["id"]))
+            return render_template("searched.html", searched = movies, details = details_list)
+        
+        # advanced search: search only by director  
+        elif request.form.get("director") and (not request.form.get("to")) and (not request.form.get("from")) and (not request.form.get("starring")):
+            director = request.form.get("director")
+            movies = db.execute("SELECT * FROM movies "
+                                " INNER JOIN directors ON movies.id = directors.movie_id "
+                                " INNER JOIN people ON directors.person_id = people.id "
+                                " WHERE people.name = ?", director)
+            details_list = []
+            for movie in movies:
+                details_list.append(get_details(movie["movie_id"]))
+            return render_template("searched.html", searched = movies, details = details_list)
+            
+
+        # advanced search: search only by starring
+        elif request.form.get("starring") and (not request.form.get("to")) and (not request.form.get("from")) and (not request.form.get("director")):
+            star = request.form.get("starring")
+            movies = db.execute("SELECT * FROM movies "
+                                " INNER JOIN stars ON movies.id = stars.movie_id "
+                                " INNER JOIN people ON stars.person_id = people.id "
+                                " WHERE people.name = ?", star)
+            details_list = []
+            for movie in movies:
+                details_list.append(get_details(movie["movie_id"]))
+            return render_template("searched.html", searched = movies, details = details_list)
+
+        # TO DO: searching by ratings
+
     # User reached route via GET (as by clicking a link or via redirect)
     else: 
         return render_template("search.html")
