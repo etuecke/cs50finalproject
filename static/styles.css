@@ -82,10 +82,13 @@ p {
   font-family: 'Montserrat',sans-serif;
 }
 
-.container {
+.container, .news-container {
   background-color: #f8f8ff;
   border-style: solid;
-  padding: 20px;
+  padding: 15px;
+}
+
+.news-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
