@@ -144,12 +144,37 @@ def register():
         return redirect("/")
 
 
-#TODO: handle quiz 
-@app.route("/quiz")
+@app.route("/quiz", methods=["GET", "POST"])
 @login_required
 def quiz():
     """Get movie recommendations."""
-    return render_template("quiz.html")
+    if request.method == "POST":
+        rows = db.execute("SELECT * FROM movies "
+                          "INNER JOIN ratings ON movies.id = ratings.movie_id "
+                          "WHERE movies.year > ? AND ratings.rating > ? AND votes > ?", 2010, 7, 1000)
+        # Get four random movies (make sure there are no repeats)
+        movies = []
+        for i in range (0, 4):
+            repeat = True
+            already_chosen_indices = []
+            while repeat:
+                row_index = random.randint(0, len(rows)-1)
+                if (row_index not in already_chosen_indices): # else will repeat and choose a new random value
+                    movies.append(rows[row_index])
+                    already_chosen_indices.append(row_index)
+                    repeat = False 
+               
+        return render_template("quizQuestion1.html", options = movies)
+
+    else:
+        return render_template("quiz.html")
+
+@app.route("/quizQuestion1", methods=["GET", "POST"])
+@login_required
+def quizQuestion1():
+    if request.method == "POST":
+        title = request.form.get("title")
+        return render_template("quizQuestion2.html", title = title)
 
 
 #TODO handle searching movies (use quote() from Finance as a template)

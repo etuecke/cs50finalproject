@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quiz Question 2
+{% endblock %}
+
+
+<input type="hidden" id="postId" name="postId" value="34657">
+
+{% block main %}
+    <!-- <form action="/quizQuestion2" method="post"> -->
+        <div>
+            <h5 class="mb-3">Question 2</h5>
+            <p class="mb-3">Pick another movie!</p>
+        </div>
+        <div class="news-container">
+        {% for option in options %}
+        <form action="/quizQuestion1" method="post">
+            <div class="flex-item">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <p class="card-text">{{option.title}}</p>
+                        <input type="hidden" id="title" name="title" value="{{option.title}}">
+                        <button class="button" type="submit">Select</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        {% endfor %}
+            
+        </div>
+
+{% endblock %}
