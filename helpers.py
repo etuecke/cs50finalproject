@@ -119,6 +119,10 @@ def get_random_movie_list():
                 already_chosen_indices.append(row_index)
                 repeat = False 
     
+    # Get poster urls 
+        for movie in movies:
+            movie["url"] = get_poster_url(movie["title"])
+            
     return movies
 
 

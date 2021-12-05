@@ -150,11 +150,6 @@ def quiz():
     """Get movie recommendations."""
     if request.method == "POST":
         movies = get_random_movie_list()
-        
-        # Get poster urls 
-        for movie in movies:
-            movie["url"] = get_poster_url(movie["title"])
-               
         return render_template("quizQuestion1.html", options = movies)
 
     else:
