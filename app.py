@@ -9,7 +9,8 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
 import random
 
-from helpers import apology, login_required, get_details, get_reviews, get_review_details, get_random_movie_list, get_random_years_list, get_random_words
+from helpers import apology, login_required, get_details, get_reviews, get_review_details, get_random_movie_list, get_random_years_list, get_random_words, get_poster_url
+
 
 # Configure app
 app = Flask(__name__)
@@ -90,7 +91,6 @@ def logout():
     return redirect("/")
 
 
-#TODO: add user to users database upon registration
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""
@@ -150,6 +150,11 @@ def quiz():
     """Get movie recommendations."""
     if request.method == "POST":
         movies = get_random_movie_list()
+        
+        # Get poster urls 
+        for movie in movies:
+            movie["url"] = get_poster_url(movie["title"])
+               
         return render_template("quizQuestion1.html", options = movies)
 
     else:
@@ -209,7 +214,6 @@ def quizQuestion4():
 
 
 
-#TODO handle searching movies (use quote() from Finance as a template)
 @app.route("/search", methods=["GET", "POST"])
 @login_required
 def search():
@@ -257,7 +261,6 @@ def search():
     else: 
         return render_template("search.html")
 
-#TODO: fetch news 
 @app.route("/news", methods=["GET", "POST"])
 @login_required
 def news():
@@ -269,11 +272,10 @@ def news():
         reviews.append(temp)
     return render_template("news.html", reviews=reviews)
 
-#TODO: fetch random rec (lucky) 
 @app.route("/lucky")
 @login_required
 def lucky():
     """Get random movie rec."""
     rows = db.execute("SELECT * FROM movies")
     random_mov = rows[random.randint(0, len(rows)-1)]
-    return render_template("lucky.html", lucky = random_mov, details = get_details(random_mov["id"]))
+    return render_template("lucky.html", lucky = random_mov, details = get_details(random_mov["id"]), url = get_poster_url(random_mov["title"]))

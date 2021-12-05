@@ -6,10 +6,16 @@
 
 {% block main %}
     <form action="/lucky" method="post">
-        <div>
-            <p class="mb-3">{{ lucky.title }}, {{ lucky.year }}</p>
-            <p class="mb-3">Directed by: {{ details.directors }}</p>
-            <p class="mb-3">Starring: {{ details.stars }}</p>
+        <div class="container">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src={{url}} alt="Card image cap">
+                <div class="card-body">
+                <h5 class="card-title">{{ lucky.title }}</h5>
+                <p class="card-text">{{ lucky.year }}</p>
+                <p class="card-text">Directed by: {% for director in details.directors %}{{ director }} | {% endfor %}</p>
+                <p class="card-text">Starring: {% for star in details.stars %}{{ star }} | {% endfor %}</p>
+                </div>
+            </div>
         </div>
     </form>
 {% endblock %}

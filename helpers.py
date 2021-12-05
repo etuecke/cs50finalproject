@@ -39,6 +39,7 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
+########## Function to get details from database ###################################################
 def get_details(movie_id):
     """Get directors (array), stars (array), ratings (float), year of a movie (int)"""
     details= {}
@@ -69,11 +70,12 @@ def get_details(movie_id):
 
     return details
 
+########## Functions to get movie news ###################################################
 def get_reviews():
     """Look up details for reviews."""
     # Contact API
     try:
-        api_key = os.environ.get("NYT_KEY")
+        api_key = os.environ.get("API_KEY")
         url = f"https://api.nytimes.com/svc/movies/v2/reviews/search.json?&api-key={api_key}"
         response = requests.get(url)
         response.raise_for_status()
@@ -99,6 +101,7 @@ def get_review_details(review):
         "image_url": review["multimedia"]["src"]
     }
 
+##### helper functions for quiz 
 
 def get_random_movie_list():
     rows = db.execute("SELECT * FROM movies "
@@ -143,3 +146,25 @@ def get_random_words(full_strings):
         word_list.append(word)
 
     return word_list
+
+########## Functions to get movie posters ###################################################
+def get_poster_url(title):
+    """Look up poster url for movie."""
+    # Contact API
+    try:
+        api_key = os.environ.get("IMDB_KEY")
+        url = f"https://imdb-api.com/en/API/SearchMovie/{api_key}/{title}"
+        response = requests.get(url)
+        response.raise_for_status()
+    except requests.RequestException:
+        print("there")
+        return None
+
+    # Parse response
+    try:
+        reviews = response.json()
+        print (reviews["results"][0]["image"])
+        return reviews["results"][0]["image"]
+    except (KeyError, TypeError, ValueError):
+        print("here")
+        return None

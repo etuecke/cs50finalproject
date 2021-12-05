@@ -18,6 +18,7 @@
         <form action="/quizQuestion1" method="post">
             <div class="flex-item">
                 <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src={{option.url}} alt="Card image cap">
                     <div class="card-body">
                         <p class="card-text">{{option.title}}</p>
                         <input type="hidden" id="title" name="title" value="{{option.title}}">
