@@ -122,7 +122,7 @@ def get_random_movie_list():
     # Get poster urls 
         for movie in movies:
             movie["url"] = get_poster_url(movie["title"])
-            
+
     return movies
 
 
@@ -150,6 +150,16 @@ def get_random_words(full_strings):
         word_list.append(word)
 
     return word_list
+
+def get_random_movie_from_director(director_name):
+    rows = db.execute("SELECT title FROM movies "
+                      "INNER JOIN directors ON movies.id = directors.movie_id "
+                      "INNER JOIN people ON directors.person_id = people.id "
+                      "WHERE people.name = ?", director_name)
+    
+    row_index = random.randint(0, len(rows)-1)
+
+    return rows[row_index]
 
 ########## Functions to get movie posters ###################################################
 def get_poster_url(title):

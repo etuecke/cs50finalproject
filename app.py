@@ -9,7 +9,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
 import random
 
-from helpers import apology, login_required, get_details, get_reviews, get_review_details, get_random_movie_list, get_random_years_list, get_random_words, get_poster_url
+from helpers import apology, login_required, get_details, get_reviews, get_review_details, get_random_movie_list, get_random_years_list, get_random_words, get_poster_url, get_random_movie_from_director
 
 
 # Configure app
@@ -149,6 +149,9 @@ def register():
 def quiz():
     """Get movie recommendations."""
     if request.method == "POST":
+        # empty whatever was stored in the sql database previously 
+        db.execute("DELETE from quizTempData")
+
         movies = get_random_movie_list()
         return render_template("quizQuestion1.html", options = movies)
 
@@ -162,6 +165,7 @@ def quizQuestion1():
     if request.method == "POST":
         title = request.form.get("title")
         # add title to the sql database
+        db.execute("INSERT INTO quizTempData(value, question) VALUES(?,?)", title, 1)
         
         movies = get_random_movie_list()
         return render_template("quizQuestion2.html", options = movies)
@@ -173,6 +177,8 @@ def quizQuestion2():
     if request.method == "POST":
         title = request.form.get("title")
         # add title to the sql database
+        db.execute("INSERT INTO quizTempData(value, question) VALUES(?,?)", title, 2)
+
 
         years = get_random_years_list()
         return render_template("quizQuestion3.html", options = years)
@@ -183,7 +189,9 @@ def quizQuestion2():
 def quizQuestion3():
     if request.method == "POST":
         year = request.form.get("year")
+        data = str(year)
         # add year to the sql database
+        db.execute("INSERT INTO quizTempData(value, question) VALUES(?,?)", data, 3)
         
         movie_titles = get_random_movie_list()
         words = get_random_words(movie_titles)
@@ -204,8 +212,50 @@ def quizQuestion4():
     if request.method == "POST":
         title = request.form.get("title")
         # add title to the sql database
-    
-        return render_template("quizResults.html")
+        db.execute("INSERT INTO quizTempData(value, question) VALUES(?,?)", title, 4)
+
+        # retreive information from database to send to the quizResults file
+        movie1_title = (db.execute("SELECT value FROM quizTempData WHERE question = ?", 1))[0].get("value")
+        movie2_title = (db.execute("SELECT value FROM quizTempData WHERE question = ?", 2))[0].get("value")
+        year = (db.execute("SELECT value FROM quizTempData WHERE question = ?", 3))[0].get("value")
+        movie3_title = (db.execute("SELECT value FROM quizTempData WHERE question = ?", 4))[0].get("value")
+
+        # find the directors the movies: 
+        director1 = db.execute("SELECT name FROM people "
+                               "INNER JOIN directors ON people.id = directors.person_id "
+                               "INNER JOIN movies ON directors.movie_id = movies.id "
+                               "WHERE movies.title = ?", movie1_title)[0].get("name")
+        director2 = db.execute("SELECT name FROM people "
+                               "INNER JOIN directors ON people.id = directors.person_id "
+                               "INNER JOIN movies ON directors.movie_id = movies.id "
+                               "WHERE movies.title = ?", movie2_title)[0].get("name")
+        
+        director3 = db.execute("SELECT name FROM people "
+                               "INNER JOIN directors ON people.id = directors.person_id "
+                               "INNER JOIN movies ON directors.movie_id = movies.id "
+                               "WHERE movies.title = ?", movie3_title)[0].get("name")
+
+        # pick out random movies based on that information
+        # 1. based on directors
+        movie1 = get_random_movie_from_director(director1)
+        movie2 = get_random_movie_from_director(director2)
+        movie3 = get_random_movie_from_director(director3)
+
+        # 2. based on year 
+        rows = db.execute("SELECT title FROM movies WHERE year = ?", year)
+        row_index = random.randint(0, len(rows)-1)
+        movie4 = rows[row_index]
+
+        movies = [movie1, movie2, movie3, movie4]
+        poster_urls = []
+        # Get poster urls 
+        for movie in movies:
+            poster_urls.append(get_poster_url(movie.get('title')))
+
+        print(poster_urls)
+
+        # find a random movie from the same year 
+        return render_template("quizResults.html", movies = movies, urls = poster_urls)
 
 
 
