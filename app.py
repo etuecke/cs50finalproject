@@ -9,7 +9,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
 import random
 
-from helpers import apology, login_required, get_details, get_reviews, get_review_details
+from helpers import apology, login_required, get_details, get_reviews, get_review_details, get_poster_url
 
 # Configure app
 app = Flask(__name__)
