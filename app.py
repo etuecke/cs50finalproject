@@ -163,6 +163,9 @@ def quiz():
                     movies.append(rows[row_index])
                     already_chosen_indices.append(row_index)
                     repeat = False 
+        # Get poster urls 
+        for movie in movies:
+            movie["url"] = get_poster_url(movie["title"])
                
         return render_template("quizQuestion1.html", options = movies)
 
