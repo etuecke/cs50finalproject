@@ -5,6 +5,8 @@ import urllib.parse
 from flask import redirect, render_template, request, session
 from functools import wraps
 from cs50 import SQL
+import random
+
 # Configure CS50 Library to use SQLite database
 db = SQL("sqlite:///movies.db")
 
@@ -96,3 +98,48 @@ def get_review_details(review):
         "link": review["link"]["url"], 
         "image_url": review["multimedia"]["src"]
     }
+
+
+def get_random_movie_list():
+    rows = db.execute("SELECT * FROM movies "
+                          "INNER JOIN ratings ON movies.id = ratings.movie_id "
+                          "WHERE movies.year > ? AND ratings.rating > ? AND votes > ?", 2010, 7, 1000)
+    # Get four random movies (make sure there are no repeats)
+    movies = []
+    for i in range (0, 4):
+        repeat = True
+        already_chosen_indices = []
+        while repeat:
+            row_index = random.randint(0, len(rows)-1)
+            if (row_index not in already_chosen_indices): # else will repeat and choose a new random value
+                movies.append(rows[row_index])
+                already_chosen_indices.append(row_index)
+                repeat = False 
+    
+    return movies
+
+
+def get_random_years_list():
+    list = []
+
+    for i in range(0, 4):
+        repeat = True 
+        already_chosen_year = []
+        while repeat:
+            num = random.randint(1990, 2020)
+            if (num not in already_chosen_year):
+                list.append(num)
+                already_chosen_year.append(num)
+                repeat = False
+
+    return list
+
+def get_random_words(full_strings):
+    word_list = []
+
+    for this_string in full_strings:
+        title = this_string.get('title')
+        word = random.choice(title.split())
+        word_list.append(word)
+
+    return word_list

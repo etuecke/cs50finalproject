@@ -9,7 +9,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
 import random
 
-from helpers import apology, login_required, get_details, get_reviews, get_review_details
+from helpers import apology, login_required, get_details, get_reviews, get_review_details, get_random_movie_list, get_random_years_list, get_random_words
 
 # Configure app
 app = Flask(__name__)
@@ -149,32 +149,64 @@ def register():
 def quiz():
     """Get movie recommendations."""
     if request.method == "POST":
-        rows = db.execute("SELECT * FROM movies "
-                          "INNER JOIN ratings ON movies.id = ratings.movie_id "
-                          "WHERE movies.year > ? AND ratings.rating > ? AND votes > ?", 2010, 7, 1000)
-        # Get four random movies (make sure there are no repeats)
-        movies = []
-        for i in range (0, 4):
-            repeat = True
-            already_chosen_indices = []
-            while repeat:
-                row_index = random.randint(0, len(rows)-1)
-                if (row_index not in already_chosen_indices): # else will repeat and choose a new random value
-                    movies.append(rows[row_index])
-                    already_chosen_indices.append(row_index)
-                    repeat = False 
-               
+        movies = get_random_movie_list()
         return render_template("quizQuestion1.html", options = movies)
 
     else:
         return render_template("quiz.html")
+
 
 @app.route("/quizQuestion1", methods=["GET", "POST"])
 @login_required
 def quizQuestion1():
     if request.method == "POST":
         title = request.form.get("title")
-        return render_template("quizQuestion2.html", title = title)
+        # add title to the sql database
+        
+        movies = get_random_movie_list()
+        return render_template("quizQuestion2.html", options = movies)
+
+
+@app.route("/quizQuestion2", methods=["GET", "POST"])
+@login_required
+def quizQuestion2():
+    if request.method == "POST":
+        title = request.form.get("title")
+        # add title to the sql database
+
+        years = get_random_years_list()
+        return render_template("quizQuestion3.html", options = years)
+
+
+@app.route("/quizQuestion3", methods=["GET", "POST"])
+@login_required
+def quizQuestion3():
+    if request.method == "POST":
+        year = request.form.get("year")
+        # add year to the sql database
+        
+        movie_titles = get_random_movie_list()
+        words = get_random_words(movie_titles)
+
+        options = []
+        for i in range(0, 4):
+            option_set = []
+            option_set.append(movie_titles[i])
+            option_set.append(words[i])
+            options.append(option_set)
+        
+        return render_template("quizQuestion4.html", options = options) #first value is movie, the second is the word 
+
+
+@app.route("/quizQuestion4", methods=["GET", "POST"])
+@login_required
+def quizQuestion4():
+    if request.method == "POST":
+        title = request.form.get("title")
+        # add title to the sql database
+    
+        return render_template("quizResults.html")
+
 
 
 #TODO handle searching movies (use quote() from Finance as a template)
