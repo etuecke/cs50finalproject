@@ -90,7 +90,6 @@ def logout():
     return redirect("/")
 
 
-#TODO: add user to users database upon registration
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""
@@ -180,7 +179,6 @@ def quizQuestion1():
         return render_template("quizQuestion2.html", title = title)
 
 
-#TODO handle searching movies (use quote() from Finance as a template)
 @app.route("/search", methods=["GET", "POST"])
 @login_required
 def search():
@@ -228,7 +226,6 @@ def search():
     else: 
         return render_template("search.html")
 
-#TODO: fetch news 
 @app.route("/news", methods=["GET", "POST"])
 @login_required
 def news():
@@ -240,11 +237,10 @@ def news():
         reviews.append(temp)
     return render_template("news.html", reviews=reviews)
 
-#TODO: fetch random rec (lucky) 
 @app.route("/lucky")
 @login_required
 def lucky():
     """Get random movie rec."""
     rows = db.execute("SELECT * FROM movies")
     random_mov = rows[random.randint(0, len(rows)-1)]
-    return render_template("lucky.html", lucky = random_mov, details = get_details(random_mov["id"]))
+    return render_template("lucky.html", lucky = random_mov, details = get_details(random_mov["id"]), url = get_poster_url(random_mov["title"]))
