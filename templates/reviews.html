@@ -6,10 +6,22 @@
 
 {% block main %}
     <form action="/reviews" method="post">
-        <div>
-            <p class="mb-3">Reviews page</p>
-            <p class="mb-3">Add New Review</p>
-            <p class="mb-3">Past Movie Reviews Log </p>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <br><br>
+                    <h5> Write a New Review: </h5> 
+                    <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="movietitle" name="movietitle" placeholder="Movie Title" type="text" maxlength="50" size="50">
+                    <br>
+                    <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="review" name="review" style="height:140px" placeholder="Write Review Here" type="text" maxlength="50" size="50">
+                    <br><br>
+                </div>
+
+                <div class="col-sm">
+                    <div class=
+                    <button type="submit">Add New Review</button>
+                </div>
+            </div>
         </div>
     </form>
 {% endblock %}
