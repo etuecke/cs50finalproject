@@ -20,10 +20,10 @@ This web app was made with Python, Jinja, Flask, HTML, CSS for use on computer a
 # The Directory 
 
 ## Templates Directory
-* apology.html:
-* details.html:
-* index.html:
-* layout.html:
+* apology.html: an HTML page that displays whatever error the user may run into.
+* details.html: [REMOVE THIS IF WE DON'T END UP USING IT!!!!]
+* index.html: the landing page that links users to other pages and log in.
+* layout.html: the base HTML page used as a template for the rest of the HTML pages
 * login.html: 
 * lucky.html:
 * news.html:
