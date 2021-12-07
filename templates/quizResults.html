@@ -17,7 +17,7 @@
         <form action="/quizResults" method="post">
             <div class="flex-item">
                 <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src={{urls[loop_index0]}} alt="Card image cap">
+                    <img class="card-img-top" src={{urls[loop.index0]}} alt="Card image cap">
                     <div class="card-body">
                         <p class="card-text">{{movie.title}}</p>
                         <input type="hidden" id="title" name="title" value="{{movie.title}}">
