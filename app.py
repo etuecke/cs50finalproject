@@ -36,7 +36,6 @@ def after_request(response):
     return response
 
 
-#TODO: implement homepage
 @app.route("/")
 @login_required
 def index():
@@ -364,7 +363,7 @@ def search():
 
             return render_template("searched.html", searched = movies, details = details_list)
 
-        # TO DO: searching by ratings
+        return render_template("searched.html", searched = movies, details = details_list)
     
     # User reached route via GET (as by clicking a link or via redirect)
     else: 
