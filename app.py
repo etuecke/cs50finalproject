@@ -36,7 +36,6 @@ def after_request(response):
     return response
 
 
-#TODO: implement homepage
 @app.route("/")
 @login_required
 def index():
@@ -45,24 +44,27 @@ def index():
     # get movies I've watched
     query1 = "SELECT movie_title FROM homepageMovies WHERE type =? AND user_id =?"
     haveWatched = db.execute(query1, "haveWatched", session["user_id"]) # list of dicts that store movie_title 
-    details1 = [] # list of dicts that store directors, stars, rating, year of each movie
-    for i in range(len(haveWatched)):
-        id = db.execute("SELECT id FROM movies WHERE title = ?", haveWatched[i]['movie_title'])[0]['id']
-        details1.append(get_details(id))
-        url = get_poster_url(haveWatched[i]['movie_title'])
-        details1[i]['url'] = url
-    print(haveWatched)
+    details1 = [] # list of dicts that store directors, stars, rating, year of each movie for movies I've watched
+
+    if len(haveWatched) != 0:
+        for i in range(len(haveWatched)):
+            id = db.execute("SELECT id FROM movies WHERE title = ?", haveWatched[i]['movie_title'])[0]['id']
+            details1.append(get_details(id))
+            url = get_poster_url(haveWatched[i]['movie_title'])
+            details1[i]['url'] = url
 
     # get movies to watch
     query2 = "SELECT movie_title FROM homepageMovies WHERE type =? AND user_id =?"
-    toWatch = db.execute(query2, "toWatch", session["user_id"])
-    details2 = []
-    for movie in toWatch:
-        id = db.execute("SELECT id FROM movies WHERE title = ?", movie['movie_title'])[0]['id']
-        details2.append(get_details(id))
-    # print(toWatch)
+    toWatch = db.execute(query2, "toWatch", session["user_id"]) # list of dicts that store movie_title 
+    details2 = [] # list of dicts that store directors, stars, rating, year of each movie for movies on My Watchlist
+    if len(toWatch) != 0:
+        for i in range(len(toWatch)):
+            id = db.execute("SELECT id FROM movies WHERE title = ?", movie['movie_title'])[0]['id']
+            details2.append(get_details(id))
+            url = get_poster_url(toWatch[i]['movie_title'])
+            details2[i]['url'] = url
 
-    return render_template("index.html", haveWatched = haveWatched, toWatch = toWatch, details1 = details1)
+    return render_template("index.html", haveWatched = haveWatched, toWatch = toWatch, details1 = details1, details2 = details2)
 
 
 @app.route("/login", methods=["GET", "POST"])

@@ -8,22 +8,13 @@
     <form action="/index" method="post">
         <!--Show movies I've seen and recommended movies-->
         <div class="mb-3">
-            <h2>My Watchlist</h2>
-            <table class = "table">
-                <tr>
-                    {% for movie in toWatch %}
-                        <th>{{ movie.movie_title }} </th>
-                    {% endfor %}
-                </tr>
-            </table>
-
             <div class="container">
                 <h2>Movies I've Seen</h2>
                 <div class="slider">
                     <!--slider items-->
                     <div class="slider-items">
                         <!-- <div class="item-active">
-                            <img src="{{details1[0].url}}" width="100%" height="100%">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/d/dc/Grumpy_Cat_%2814556024763%29_%28cropped%29.jpg" width="100%" height="100%">
                         </div> -->
                         {% for detail in details1 %}
                         <div class="item">
@@ -35,6 +26,25 @@
                     <div class="left-slide">&lt;</div>
                     <div class="right-slide">></div>
                 </div>
+
+                <h2>My Watchlist</h2>
+                <div class="slider">
+                    <!--slider items-->
+                    <div class="slider-items">
+                        <!-- <div class="item-active">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/d/dc/Grumpy_Cat_%2814556024763%29_%28cropped%29.jpg" width="100%" height="100%">
+                        </div> -->
+                        {% for detail in details2 %}
+                        <div class="item">
+                            <img src="{{details2[loop.index0].url}}" width="100%" height="100%">
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <!--slider controls-->
+                    <div class="left-slide">&lt;</div>
+                    <div class="right-slide">></div>
+                </div>
+                </div>
             </div>
 
             <script>
@@ -44,7 +54,7 @@
                 var numSlides=slides.length;
                 var index=0;
 
-                slides[index].classList.add("active")
+                slides[0].classList.add("active")
 
                 nextSlide.onclick=function() {
                     next("next");
