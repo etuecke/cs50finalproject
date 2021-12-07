@@ -5,8 +5,8 @@
 ### Initial Databasing
 All of the data from this project draws from the movies.db database, containing information on the movies themselves, the directors, the stars, the ratings for the movies, etc. In addition, we set up several more tables in this database that are continuously updated and modified as the user interacts with our website. See the description of these tables below:
 1. homepageMovies
-    - Fields: movie_title (text), user_id (integer), type (text)
-    - This data table is used to populate the homepage information that displays the user's to-watch list and the movies that the user has already watched
+    - Fields: movie_title (text), user_id (integer), type (text).
+    - This data table is used to populate the homepage information that displays the user's to-watch list and the movies that the user has already watched.
     - This table is populated when the user uses the "search" function to search up a movie or series of movies. On the search results page (searched.html), the user can choose to add movies to their watch list or to the list of movies they have already watched. Doing so will store that information in the homepageMovies table. 
     - The 'movie_title' field is set to whatever movie the user selected, the 'user_id' field is the id for the current session, and the 'type' field is set either to "toWatch" or "haveWatched." This "toWatch" or "haveWatched" determines where the movie is displayed on the home page, which accesses the data in this table.
 2. quizTempData:
@@ -16,9 +16,9 @@ All of the data from this project draws from the movies.db database, containing 
     - After answering every question, the question number (question field) and the user's answer to the question (value) is stored in this table.
     - This data is then accessed in the algorithm that makes movie recommendations to the user at the end of the quiz. 
 3. users:
-    - The users table tracks information on various users that login to the platform. This particular table works similarly as the login implementation for the 'Finance' PSet worked
-4. INCLUDE THE NEW TABLE FOR THE REVIEWS PAGE
-    - DESCRIPTION FOR THIS PAGE
+    - The users table tracks information on various users that login to the platform. This particular table works similarly as the login implementation for the 'Finance' pset worked.
+**4. INCLUDE THE NEW TABLE FOR THE REVIEWS PAGE
+    - DESCRIPTION FOR THIS PAGE**
 
 ### Web scraping / API usage
 It took a significantly longer time to gather the news data from Google News than we had anticipated. Initially, we attempted to web scrape with Jupyter Notebook and CoLab but struggled with installing Selenium. When we finally got Selenium to work properly with the webdriver in Jupyter, we found it very difficult to pull information from Google News. Thus, we opted to use the New York Times Dev Portal, which allowed us to access movie reviews through its API. By using the NYT API, we were able to pull data dynamically from the website, so our website updates autonomically when the NYT posts a new review. Furthermore, we also used the IMDB API to pull movie posters from the IMDB database, which are displayed along with movie information on the homepage, the quiz, the movie reviews page, and the "I'm Feeling Lucky Page." 
@@ -51,7 +51,7 @@ Let us go through the pages and the design choices and considerations that went 
 7. I'm Feeling Lucky ("/lucky")
     - This is a feature that allows the user to be presented with a randomly chosen movie to watch. The function randomly sorts all the movies in the movies table in the database and selects the first item to display to the user. 
 8. Reviews ("/reviews"):
-*KRISHAAAAAAAAA*
+**KRISHAAAAAAAAA**
 
 ### Helpers.py
 1. get_details():
