@@ -59,7 +59,7 @@ def index():
     details2 = [] # list of dicts that store directors, stars, rating, year of each movie for movies on My Watchlist
     if len(toWatch) != 0:
         for i in range(len(toWatch)):
-            id = db.execute("SELECT id FROM movies WHERE title = ?", movie['movie_title'])[0]['id']
+            id = db.execute("SELECT id FROM movies WHERE title = ?", toWatch[i]['movie_title'])[0]['id']
             details2.append(get_details(id))
             url = get_poster_url(toWatch[i]['movie_title'])
             details2[i]['url'] = url
