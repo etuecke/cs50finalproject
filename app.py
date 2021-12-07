@@ -438,3 +438,13 @@ def reviews():
 
     else:
         return render_template("reviews.html")
+
+@app.route("/visualizations", methods=["GET", "POST"])
+@login_required
+def visualizations():
+    return render_template("visualizations.html")
+
+@app.route("/visualizations2", methods=["GET", "POST"])
+@login_required
+def visualizations2():
+    return render_template("visualizations2.html")
