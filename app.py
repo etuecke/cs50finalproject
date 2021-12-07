@@ -1,7 +1,7 @@
 import os
 
 from cs50 import SQL
-from flask import Flask, flash, redirect, render_template, request, session
+from flask import Flask, flash, redirect, render_template, request, session, jsonify
 from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
@@ -10,7 +10,6 @@ from datetime import datetime
 import random
 
 from helpers import apology, login_required, get_details, get_reviews, get_review_details, get_random_movie_list, get_random_years_list, get_random_words, get_poster_url, get_random_movie_from_director
-
 
 # Configure app
 app = Flask(__name__)
@@ -284,24 +283,12 @@ def search():
                                 " WHERE people.name = ?", director)
             details_list = []
             for movie in movies:
-                details_list.append(get_details(movie["movie_id"]))
+                details_list.append(get_details(movie["id"]))
             return render_template("searched.html", searched = movies, details = details_list)
             
 
         # advanced search: search only by starring
         elif request.form.get("starring") and (not request.form.get("to")) and (not request.form.get("from")) and (not request.form.get("director")):
-            lower_bound = request.form.get("from")
-            upper_bound = request.form.get("to")
-            movies = db.execute("SELECT * FROM movies "
-                                " INNER JOIN ratings ON movies.id = ratings.movie_id "
-                                " WHERE rating BETWEEN ? AND ?", from, to)
-            details_list = []
-            for movie in movies:
-                details_list.append(get_details(movie["movie_id"]))
-            return render_template("searched.html", searched = movies, details = details_list)
-
-        # TO DO: searching by ratings
-        elif request.form.get("ratings") and (not request.form.get("to")) and (not request.form.get("from")) and (not request.form.get("director")):
             star = request.form.get("starring")
             movies = db.execute("SELECT * FROM movies "
                                 " INNER JOIN stars ON movies.id = stars.movie_id "
@@ -309,7 +296,22 @@ def search():
                                 " WHERE people.name = ?", star)
             details_list = []
             for movie in movies:
-                details_list.append(get_details(movie["movie_id"]))
+                details_list.append(get_details(movie["id"]))
+            return render_template("searched.html", searched = movies, details = details_list)
+
+        # advanced search: searching by ratings 
+        elif request.form.get("to") and (request.form.get("from")) and ((request.form.get("starring")) or (not request.form.get("director"))):
+            lower_bound = request.form.get("from")
+            upper_bound = request.form.get("to")
+
+            if request.form.get("starring"):
+                movies = db.execute("SELECT * FROM movies "
+                                    " INNER JOIN ratings ON movies.id = ratings.movie_id "
+                                    " WHERE rating BETWEEN ? AND ?", lower_bound, upper_bound)
+                                               
+            details_list = []
+            for movie in movies:
+                details_list.append(get_details(movie["id"]))
             return render_template("searched.html", searched = movies, details = details_list)
 
     # User reached route via GET (as by clicking a link or via redirect)
