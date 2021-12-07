@@ -136,7 +136,7 @@ def register():
         # Security: database should never store plain text password
         # Security: User generate_password_hash to generate a hash of the password
         password_hash = generate_password_hash(request.form.get("password"))
-        db.execute("INSERT into users(username, hash) VALUES(?,?)", request.form.get("username"), password_hash)
+        new = db.execute("INSERT into users(username, hash) VALUES(?,?)", request.form.get("username"), password_hash)
 
         # Log user in 
         # session["user_id"] keeps track of which user is logged in
@@ -356,6 +356,21 @@ def lucky():
 @login_required
 def reviews():
     if request.method == "POST":
-        return render_template("reviews.html")
+        if request.form.get("movietitle") and request.form.get("review"):
+            movie_title = request.form.get("movietitle")
+            review = request.form.get("review")
+
+            username = db.execute("SELECT username FROM users WHERE id = ?", session["user_id"])
+            print(username)
+
+            db.execute("INSERT INTO reviews(id, username, title, review, datetime) VALUES(?,?,?,?,?)", session["user_id"], username[0]["username"], movie_title, review, datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+
+        reviews_list = db.execute("SELECT * FROM reviews")
+
+        for movie in reviews_list:
+            movie["url"] = get_poster_url(movie["title"])     
+
+        return render_template("reviews.html", all_reviews = reviews_list)
+
     else:
         return render_template("reviews.html")
