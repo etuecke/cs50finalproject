@@ -9,7 +9,7 @@
         <!--Show movies I've seen and recommended movies-->
         <div class="mb-3">
                 <h1>Movies I've Seen</h2>
-                {% if details1|length > 1 %}
+                {% if details1|length > 0 %}
                     <div class="news-container">
                         {% for detail in details1 %}
                             <div class="flex-item">
@@ -33,7 +33,7 @@
                 <br/>
                 <br/>
                 <h1>My Watchlist</h2>
-                {% if details2|length > 1 %}
+                {% if details2|length > 0 %}
                     <div class="news-container">
                         {% for detail in details2 %}
                             <div class="flex-item">
