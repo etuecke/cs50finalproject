@@ -7,21 +7,56 @@
 {% block main %}
     <form action="/reviews" method="post">
         <div class="container">
+            <p class="mb-3"><i>Note: You must post at least one review before you can see those of other users. Please be honest but respectful in your reviews and considerate of other users.</i></p>
+        </div>
+
+        <br>
+
+        <div class="container">
+            <h2>Add New Review</h2>
+            <br>
             <div class="row">
                 <div class="col-sm">
-                    <br><br>
+                    <br>
                     <h5> Write a New Review: </h5> 
                     <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="movietitle" name="movietitle" placeholder="Movie Title" type="text" maxlength="50" size="50">
                     <br>
                     <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="review" name="review" style="height:140px" placeholder="Write Review Here" type="text" maxlength="50" size="50">
-                    <br><br>
+                    <br>
                 </div>
 
                 <div class="col-sm">
-                    <div class=
-                    <button type="submit">Add New Review</button>
+                    <div class=></div>
+                    <button class="button" type="submit">Add New Review</button>
                 </div>
             </div>
         </div>
+
+        <br><br>
+        
+        <h2>Reviews Log</h2>
+        <div class="mb-3">
+            {% for reviewed in all_reviews %}
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm">
+                            <img class="card-img-top" src={{reviewed.url}} alt="Card image cap" style="width:150px;height:300px;">
+                        </div>
+
+                        <div class="col-sm">
+                            <p class="mb-3"> User: {{reviewed.username}} </p>
+                            <br>
+                            <p class="mb-3"> Date and Time of Review: {{reviewed.datetime}} </p>
+                            <br>
+                            <p class="mb-3"> Movie: {{reviewed.title}} </p>
+                            <br>
+                            <p class="mb-3"> Review: {{reviewed.review}} </p>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            {% endfor %}
+        </div>
+
     </form>
 {% endblock %}
