@@ -326,8 +326,6 @@ def searched():
         for title in title_list:
             rows = db.execute("SELECT movie_title FROM homepageMovies WHERE movie_title = ? and user_id = ?", title, session["user_id"])
             if len(rows) == 0:
-            # db.execute("INSERT INTO homepageMovies(movie_title, user_id, type) VALUES(?,?,?)", title, session["user_id"], list_type)
-
                 db.execute("INSERT INTO homepageMovies(movie_title, user_id, type) VALUES(?,?,?)", title, session["user_id"], list_type)
 
         return render_template("/index.html")

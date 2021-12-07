@@ -33,10 +33,11 @@ This web app was made with Python, Jinja, Flask, HTML, CSS for use on computer a
 * quizQuestion3: 
 * quizQuestion4: 
 * quizResults:
-* recommendations.html: 
+* recommendations.html: [REMOVE THIS IF WE DON'T END UP USING]
 * register.html:
 * search.html:
 * searched.html: 
+* reviews.html:
 
 ## Root Directory
 * helpers.py: a helper file that contains python functions that used in app.py. Methods include the apology function, getting movie reviews, and pulling poster images. 
