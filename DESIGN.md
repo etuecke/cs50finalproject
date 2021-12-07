@@ -120,3 +120,4 @@ In the implementation of the design, we took advantage of the flex containers an
 * https://developer.nytimes.com/apis
 * https://imdb-api.com/
 * https://www.w3schools.com/ 
+* https://jsonformatter.curiousconcept.com/# JSON formatting website used to format the result of the API request from the NYT website. 
