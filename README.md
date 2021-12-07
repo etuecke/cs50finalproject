@@ -48,3 +48,8 @@ This web app was made with Python, Jinja, Flask, HTML, CSS for use on computer a
 DESIGN.md includes documentation on how we implemented our project and why we made the design decisions we did. 
 
 # Using the website 
+Upon first opening the website, the user will see the login page, in which they need to log in or register for an account. After successfully registrating for an account, a user will be redirected to the login page, where they can then log into their account using the username and password that they created. 
+After logging in, users will be able to view the landing page, which displays the movies they have watched and the movies they want to watch. 
+
+## Recieving movie recommendations
+The user can recieve movie recommendations 
