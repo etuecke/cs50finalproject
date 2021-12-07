@@ -82,7 +82,7 @@ p {
   font-family: 'Montserrat',sans-serif;
 }
 
-.container, .news-container {
+.container, .news-container, .quiz-container, .lucky-container{
   background-color: #f8f8ff;
   border-style: solid;
   padding: 15px;
@@ -92,6 +92,20 @@ p {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+}
+
+.quiz-container {
+  padding: 50px;
+  margin-top: 20px;
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+.lucky-container {
+  display: flex;
+  justify-content: center;
+  margin-left: 25%;
+  margin-right: 25%;
 }
 
 table {
