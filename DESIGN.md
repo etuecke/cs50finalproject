@@ -19,6 +19,8 @@ All of the data from this project draws from the movies.db database, containing 
     - This data is then accessed in the algorithm that makes movie recommendations to the user at the end of the quiz. 
 3. users:
     - The users table tracks information on various users that login to the platform. This particular table works similarly as the login implementation for the 'Finance' PSet worked
+4. INCLUDE THE NEW TABLE FOR THE REVIEWS PAGE
+    - DESCRIPTION FOR THIS PAGE
 
 ### Web scraping / API usage (Kelsey)
 It took a significantly longer time to gather the news data from Google News than I had anticipated. Initially, I attempted to web scrape with Jupyter Notebook and CoLab but struggled with installing Selenium. When I finally got Selenium to work properly with the webdriver in Jupyter, I found it very difficult to pull information from Google News. Thus, I opted to use the New York Times Dev Portal, which allowed me to access movie reviews through its API. Furthermore, I also used the IMDB API to pull movie posters from the IMDB database, which are displayed along with movie information on the homepage, the quiz, and the "I'm Feeling Lucky Page." 
@@ -53,12 +55,51 @@ Let us go through the pages and the design choices and considerations that went 
 8. Reviews ("~/reviews"):
 
 ### Helpers.py
-1. get_details(): 
-2. get_reviews() and get_review_details: 
-3. DISCUSS HELPER FUNCTIONS FOR QUIZ HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-4. get_poster_url(): this function contacts the IMDB API, searches for the movie title using the API key, and parses the results to return the poster url. The url is then used in the src attribute of the image of the relevant html pages to display the image to the user.   
+1. get_details():
+    - We included this helper function to make it easy to assemble all relevant information about a movie, without having to copy and paste the queries required to do so over and over. 
+    - This helper function retrieves information about the directors, the stars, the movie rating, the year the movie was made, etc. using SQL queries
+2. get_reviews() and get_review_details(): 
+    - get_reviews(): KELSEY ADD SMTH HERE
+    - get_review_details(): KELSEY ADD SMTH HERE 
+    - GO INTO DEPTH ON HOW THE WEB SCRAPING STUFF HERE WORKS 
+3. Helper functions for the quiz: 
+    - get_random_movie_list()
+    - get_random_years_list()
+    - get_random_words()
+    - get_random_movie_from_director()
+    - The quiz requires multiple queries to get random movie titles/random years/random words out of movie titles. To prevent code duplication, we placed all of these SQL queries in the helper functions file. 
+4. get_poster_url(): 
+    - This function contacts the IMDB API, searches for the movie title using the API key, and parses the results to return the poster url. 
+    - The url is then used in the src attribute of the image of the relevant html pages to display the image to the user.  
+    - This helper function is called frequently in our application any time we need to display a poster image for a movie along with the title of the movie 
 
 ## Front-end
+
+### Design Decisions for HTML Templates 
+Along with the web scraping part of this project, designing the front end and getting the template files to properly interface with our flask app took the most time. In particular, we spent a fair amount of time on correctly passing information between pages and interfacing with the database, since we had not done much of this in class. 
+See below the list of design decisions made with respect to the more complicated of these templates.
+1. index.html
+    - EXPLAIN HOW WE USED BOOTSTRAP
+2. layout.html
+    - ANY BOOTSTRAP STUFF?
+3. news.html
+    - KELSEY FILL IN
+4. quiz.html, quizQuestion1, quizQuestion2, quizQuestion3, quizQuestion4, quizResults  
+    - We used bootstrap to display the different options for these quiz pages in a flex container, with each option displayed on a different card that included a movie title and a movie poster image
+    - Jinja was used to prevent code duplication, as we used for loops to populate the flex containers
+    - Hidden input fields were used to send information back to the flask app, where it could be added to the correct table(s) in the database
+5. search.html
+    - We wanted to design a search page with multiple search options for the user to take advantage of 
+6. searched.html
+    - This was one of the most complicated pages of the templates that we did. 
+    - Using the search results, this html page populates the search data into a table that displays information like the movie title, the director(s), and the stars of the movie. It also adds a checkbox next to every row, which can be used to select multiple movies at once and add them to the watch list of have watched list (populated on the home page)
+    - We used JavaScript to determine which movies had been selected and which button had been clicked (which determines which list to add the selected movies to)
+    - We also learned some JQuery to make this section work
+    - For ease-of-design, we also used hidden input fields to store information about which movies the user selects, since these can easily be read in the flask app using request.form.get("[input field name]")
+    - When the user selects a list of movies and then clicks the "Add to Watch List" or "Have Watched" button, the value of thes hidden input fields is changed to the list of selected movies. Similarly, another input field is used to track if the "Add to Watch List" or "Have Watched" button was clicked. 
+7. reviews.html
+    - KRISHA UPDATE DESCRIPTION HERE
+    - This feature allows users to see content from other users and interact with other users
 
 ### Design Process 
 We spent a significant amount of time in the ideation process and underwent several brainstorming sessions to discuss how the website would look and how we planned to structure the code. We created a couple low-fidelity prototypes to visualize the page layouts, ultimately choosing the one we implemented. 
