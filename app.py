@@ -363,7 +363,7 @@ def search():
 
             return render_template("searched.html", searched = movies, details = details_list)
 
-        return render_template("searched.html", searched = movies, details = details_list)
+        return render_template("searched.html")
     
     # User reached route via GET (as by clicking a link or via redirect)
     else: 
