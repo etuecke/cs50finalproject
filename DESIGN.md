@@ -1,6 +1,4 @@
 # Design
-PROMPT: Your design document should be at least several paragraphs in length. Whereas your documentation is meant to be a user’s manual, 
-consider your design document your opportunity to give the staff a technical tour of your project underneath its hood.
 
 ## Back-end
 
@@ -28,17 +26,17 @@ It took a significantly longer time to gather the news data from Google News tha
 ### The Flask App
 Let us go through the pages and the design choices and considerations that went into each function:
 1. Index ("~/"): 
-    - This homepage uses the homepageMovies table in the movies.db database to populate onto the page that the user has watched already and movies that the user wants to watch
+    - This homepage uses the homepageMovies table in the movies.db database to populate onto the page that the user has watched already and movies that the user wants to watch. 
 2. Login ("~/login"), Logout ("~/logout"), and Register ("~/register")
-    - Similar implementation to Finance pset. These functions work with the users table in movies.db to log different users in and out of the application
+    - The implementation of these are similar to the Finance pset. These functions work with the users table in movies.db to log different users in and out of the application.
 3. Quiz pages ("~/quiz", "~/quizQuestion1", "~/quizQuestion2", "~/quizQuestion3", "~/quizQuestion4")
-    - Quiz: This page has a simple 'Start quiz' button that routes the user to the first page of the quiz
+    - Quiz: This page has a simple 'Start quiz' button that routes the user to the first page of the quiz.
     - Question 1: This function retrieves the title of the movie that the user picks for this question and adds it to the quizTempData table in movies.db. It then generates another series of random movies based on selection criteria defined in helpers.py and sends those movies to the quizQuestion2 html page. 
-    - Question 2: This sends a randomly generated year to the next page, quizQuestion3
+    - Question 2: This sends a randomly generated year to the next page, quizQuestion3.
     - Question 3: This page takes a random list of movies and chooses a random word out of their titles. It then takes the original list of movie titles and the random words taken from those tables and send that information to quizQuestion4, where the user will pick their favorite word out of the options provided. 
     - Question 4: The actual algorithm for computing the movie recommendations is housed in this function, which ends with the list of movie recommendations being sent to the quizResults.html page. 
     - Movie recommendations algorithm: through querying the quizTempData table in movies.db, we pick movies from the database with similar directors or that were made in the same year as the movies that the user chose. Based on the director/year, we then choose a random movie from the database given these constrained parameters. 
-    - Display: We use web scraping here to get the images of the movie posters, which are displayed along with the title on each page of the quiz
+    - Display: We use the IMDB API here to get the images of the movie posters, which are displayed along with the title on each page of the quiz.
     - Design Rationale: We chose to split this quiz up into individual html pages per question because this made it easy to store the data from each page in the movies.db database. Having each html page lead to the next question in the quiz fit the aesthetic design that we wanted to create with the quiz. 
 4. Search ("~/search")
     - The search page allows for two different ways of searching for movies: simply searching by title and searching in a more complicated way by factors like director or who is starring in the movie. 
@@ -49,9 +47,9 @@ Let us go through the pages and the design choices and considerations that went 
     - We make sure not to allow duplicate movies to be added into this table for any given user, since this would not make sense when using this table to populate the homepage if there were multiple copies of the movies being displayed.
     - We redirect directly to the home page.
 6. News ("~/news"): 
-    - Displaying the recent movie news/movie reviews from the New York Times
+    - Displaying the recent movie news/movie reviews from the New York Times.
 7. I'm Feeling Lucky ("/lucky")
-    - This is a simple feature that allows the user to be presented with a randomly chosen movie to watch
+    - This is a simple feature that allows the user to be presented with a randomly chosen movie to watch.
 8. Reviews ("~/reviews"):
 
 ### Helpers.py
@@ -79,7 +77,7 @@ Let us go through the pages and the design choices and considerations that went 
 Along with the web scraping part of this project, designing the front end and getting the template files to properly interface with our flask app took the most time. In particular, we spent a fair amount of time on correctly passing information between pages and interfacing with the database, since we had not done much of this in class. 
 See below the list of design decisions made with respect to the more complicated of these templates.
 1. index.html
-    - EXPLAIN HOW WE USED BOOTSTRAP
+    - We used jinja to pass information from the
 2. layout.html
     - ANY BOOTSTRAP STUFF?
 3. news.html
@@ -105,18 +103,18 @@ See below the list of design decisions made with respect to the more complicated
 We spent a significant amount of time in the ideation process and underwent several brainstorming sessions to discuss how the website would look and how we planned to structure the code. We created a couple low-fidelity prototypes to visualize the page layouts, ultimately choosing the one we implemented. 
 
 ### Implementation 
-In the implementation of the design, we took advantage of the flex containers and cards in Bootstrap. 
-Discuss flex and how it works w a bunch of different screen sizes
-Talk about card + grid as well 
-Jinja
+In the implementation of the design, we took advantage of the flex containers and cards in Bootstrap. By wrapping content in flex containers, we were able to size the content of our webpages to fit any screen size. Thus, users can interact with Cinema Central on computer, tablet, or mobile. We also used Bootstrap's card and grid containers to display content in an easily digestible format. Since we used flexbox with our grid, we were able to wrap cards in the grid to accomodate any screen size.  
+
 
 # Built With
 * CS50 IDE
 * VSCode 
-* Sublime + Terminal
-* GitHub
+* Sublime Text + Terminal
 * Bootstrap
 * NYT and IMDB 
+* Tableau Public 
+* GitHub
+
 
 # References and Resources
 * https://developer.nytimes.com/apis
