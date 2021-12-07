@@ -30,7 +30,7 @@ Let us go through the pages and the design choices and considerations that went 
 We spent a significant amount of time in the ideation process and underwent several brainstorming sessions to discuss how the website would look and how we planned to structure the code. We created a couple low-fidelity prototypes to visualize the page layouts, ultimately choosing the one we implemented. 
 
 ### Implementation 
-In the implementation of the design, we 
+In the implementation of the design, we took advantage of the flex containers and cards in Bootstrap. 
 Discuss flex and how it works w a bunch of different screen sizes
 Talk about card + grid as well 
 Jinja
@@ -44,3 +44,4 @@ Jinja
 # References and Resources
 * https://developer.nytimes.com/apis
 * https://imdb-api.com/
+* https://www.w3schools.com/ 
