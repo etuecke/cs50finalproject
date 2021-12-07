@@ -8,40 +8,76 @@
     <form action="/index" method="post">
         <!--Show movies I've seen and recommended movies-->
         <div class="mb-3">
-            <h2>My Watch List</h2>
+            <h2>My Watchlist</h2>
             <table class = "table">
                 <tr>
-                    <th>heading 1</th>
-                    <th>heading 2</th>
-                    <th>heading 3</th>
-                    <th>heading 4</th>
-                    <th>heading 5</th>
-                </tr>
-                <tr>
-                    <td>hello 1</td>
-                    <td>hello 2</td>
-                    <td>hello 3</td>
-                    <td>hello 4</td>
-                    <td>hello 5</td>
+                    {% for movie in toWatch %}
+                        <th>{{ movie.movie_title }} </th>
+                    {% endfor %}
                 </tr>
             </table>
-            <h2>Movies I've Watched</h2>
-            <table class = "table">
-                <tr>
-                    <th>heading 1</th>
-                    <th>heading 2</th>
-                    <th>heading 3</th>
-                    <th>heading 4</th>
-                    <th>heading 5</th>
-                </tr>
-                <tr>
-                    <td>hello 1</td>
-                    <td>hello 2</td>
-                    <td>hello 3</td>
-                    <td>hello 4</td>
-                    <td>hello 5</td>
-                </tr>
-            </table>
+
+            <div class="container">
+                <h2>Movies I've Seen</h2>
+                <div class="slider">
+                    <!--slider items-->
+                    <div class="slider-items">
+                        <!-- <div class="item-active">
+                            <img src="{{details1[0].url}}" width="100%" height="100%">
+                        </div> -->
+                        {% for detail in details1 %}
+                        <div class="item">
+                            <img src="{{details1[loop.index0].url}}" width="100%" height="100%">
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <!--slider controls-->
+                    <div class="left-slide">&lt;</div>
+                    <div class="right-slide">></div>
+                </div>
+            </div>
+
+            <script>
+                var slides=document.querySelector(".slider-items").children;
+                var nextSlide=document.querySelector(".right-slide");
+                var prevSlide=document.querySelector(".left-slide");
+                var numSlides=slides.length;
+                var index=0;
+
+                slides[index].classList.add("active")
+
+                nextSlide.onclick=function() {
+                    next("next");
+                }
+                prevSlide.onclick=function() {
+                    next("prev");
+                }
+
+                function next(direction){
+                    //handle when user clicks next slide 
+                    if (direction=="next"){
+                        index++;
+                        if (index==numSlides){    //handle when you reach end of slideshow
+                            index=0;        //loop to beginning of slides 
+                        }
+                    }
+                    //handle when user clicks previous slide
+                    else {
+                        if (index==0){      //handle when you reach the beginning of slideshow
+                            index=numSlides-1;        //loop to end of slides
+                        }
+                        else{
+                            index--;
+                        }
+                    }
+                    //update active tag if slide is being shown to user
+                    for(i=0; i<slides.length; i++){
+                        slides[i].classList.remove("active");
+                    }
+                    slides[index].classList.add("active");
+                    console.log("function works")
+                }
+            </script>
     </form>
 
 {% endblock %}
