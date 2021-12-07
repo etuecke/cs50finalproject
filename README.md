@@ -20,30 +20,48 @@ This web app was made with Python, Jinja, Flask, HTML, CSS for use on computer a
 # The Directory 
 
 ## Templates Directory
-* apology.html: an HTML page that displays whatever error the user may run into.
-* details.html: [REMOVE THIS IF WE DON'T END UP USING IT!!!!]
-* index.html: the landing page that links users to other pages and log in.
-* layout.html: the base HTML page used as a template for the rest of the HTML pages
+* apology.html: 
+    - an HTML page that displays whatever error the user may run into.
+* details.html: 
+    - [REMOVE THIS IF WE DON'T END UP USING IT!!!!]
+* index.html: 
+    - the landing page that links users to other pages and log in.
+* layout.html: 
+    - the base HTML page used as a template for the rest of the HTML pages
 * login.html: 
+    - similar to finance
 * lucky.html:
+    - random movie presented to user
 * news.html:
+    - uses webscraping to give user recent movie news /recommendations from the New York Times 
 * quiz.html: 
-* quizQuestion1: 
-* quizQuestion2: 
-* quizQuestion3: 
-* quizQuestion4: 
+    - starter page for quiz
+* quizQuestion1 
+* quizQuestion2
+* quizQuestion3
+* quizQuestion4
 * quizResults:
-* recommendations.html: [REMOVE THIS IF WE DON'T END UP USING]
+* recommendations.html: 
+    - [REMOVE THIS IF WE DON'T END UP USING]
 * register.html:
-* search.html:
+    - similar to finance
+* search.html: 
+    - page where the user can input searching criteria 
 * searched.html: 
+    - displays the results from the search page
+    - allows users to select movies and add them to the homepageMovies database under various categories
 * reviews.html:
+    - allows users to write reviews and also view the reviews written by other users
 
 ## Root Directory
-* helpers.py: a helper file that contains python functions that used in app.py. Methods include the apology function, getting movie reviews, and pulling poster images. 
-* app.py: the main python file containing routes to all pages of the web application. 
-* key.txt: a text file that contains the API keys needed for the New York Times movie reviews and the IMDB movie posters. 
-* movies.db: SQLite database containing [EVA TALK ABOUT ALL THESE TABLES!!!!!!!!!!!!!!!!!!!!] tables from which the main functionality of the app draws from.  
+* helpers.py: 
+    - a helper file that contains python functions that used in app.py. Methods include the apology function, getting movie reviews, and pulling poster images. 
+* app.py: 
+    - the main python file containing routes to all pages of the web application. 
+* key.txt: 
+    - a text file that contains the API keys needed for the New York Times movie reviews and the IMDB movie posters. 
+* movies.db: 
+    - SQLite database containing [EVA TALK ABOUT ALL THESE TABLES!!!!!!!!!!!!!!!!!!!!] tables from which the main functionality of the app draws from.  
 
 ## Design Documentation
 DESIGN.md includes documentation on how we implemented our project and why we made the design decisions we did. 
@@ -62,5 +80,9 @@ The user can search for movies
 ## Adding Movies to "Movies I've Seen" and "My Watchlist" 
 this should be easy and if you can't figure it out without this documentation u dumb
 
-## Reading Movie Reviews
-see line 62
+## Writing Movie Reviews and Interacting With Other Users
+add details here 
+this should be about the reviews page where users can write their own reviews/read reviews
+
+## Getting Movie News and Reviews (Webscraped)
+add details here about news page

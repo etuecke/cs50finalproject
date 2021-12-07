@@ -22,7 +22,7 @@ All of the data from this project draws from the movies.db database, containing 
 4. INCLUDE THE NEW TABLE FOR THE REVIEWS PAGE
     - DESCRIPTION FOR THIS PAGE
 
-### Web scraping / API usage (Kelsey)
+### Web scraping / API usage
 It took a significantly longer time to gather the news data from Google News than I had anticipated. Initially, I attempted to web scrape with Jupyter Notebook and CoLab but struggled with installing Selenium. When I finally got Selenium to work properly with the webdriver in Jupyter, I found it very difficult to pull information from Google News. Thus, I opted to use the New York Times Dev Portal, which allowed me to access movie reviews through its API. Furthermore, I also used the IMDB API to pull movie posters from the IMDB database, which are displayed along with movie information on the homepage, the quiz, and the "I'm Feeling Lucky Page." 
 
 ### The Flask App
