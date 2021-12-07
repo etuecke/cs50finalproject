@@ -23,7 +23,7 @@ All of the data from this project draws from the movies.db database, containing 
     - DESCRIPTION FOR THIS PAGE
 
 ### Web scraping / API usage
-It took a significantly longer time to gather the news data from Google News than I had anticipated. Initially, I attempted to web scrape with Jupyter Notebook and CoLab but struggled with installing Selenium. When I finally got Selenium to work properly with the webdriver in Jupyter, I found it very difficult to pull information from Google News. Thus, I opted to use the New York Times Dev Portal, which allowed me to access movie reviews through its API. Furthermore, I also used the IMDB API to pull movie posters from the IMDB database, which are displayed along with movie information on the homepage, the quiz, and the "I'm Feeling Lucky Page." 
+It took a significantly longer time to gather the news data from Google News than I had anticipated. Initially, I attempted to web scrape with Jupyter Notebook and CoLab but struggled with installing Selenium. When I finally got Selenium to work properly with the webdriver in Jupyter, I found it very difficult to pull information from Google News. Thus, I opted to use the New York Times Dev Portal, which allowed me to access movie reviews through its API. Furthermore, I also used the IMDB API to pull movie posters from the IMDB database, which are displayed along with movie information on the homepage, the quiz, the movie reviews page, and the "I'm Feeling Lucky Page." 
 
 ### The Flask App
 Let us go through the pages and the design choices and considerations that went into each function:
@@ -98,7 +98,7 @@ See below the list of design decisions made with respect to the more complicated
     - For ease-of-design, we also used hidden input fields to store information about which movies the user selects, since these can easily be read in the flask app using request.form.get("[input field name]")
     - When the user selects a list of movies and then clicks the "Add to Watch List" or "Have Watched" button, the value of thes hidden input fields is changed to the list of selected movies. Similarly, another input field is used to track if the "Add to Watch List" or "Have Watched" button was clicked. 
 7. reviews.html
-    - KRISHA UPDATE DESCRIPTION HERE
+    - We wanted to design a reviews page where users could both leave a review for a movie they've watched before, and read those of others (once they've left at least one review). 
     - This feature allows users to see content from other users and interact with other users
 
 ### Design Process 
