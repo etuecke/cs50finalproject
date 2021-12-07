@@ -344,6 +344,7 @@ def news():
         reviews.append(temp)
     return render_template("news.html", reviews=reviews)
 
+
 @app.route("/lucky")
 @login_required
 def lucky():
@@ -351,3 +352,12 @@ def lucky():
     rows = db.execute("SELECT * FROM movies")
     random_mov = rows[random.randint(0, len(rows)-1)]
     return render_template("lucky.html", lucky = random_mov, details = get_details(random_mov["id"]), url = get_poster_url(random_mov["title"]))
+
+
+@app.route("/reviews", methods=["GET", "POST"])
+@login_required
+def reviews():
+    if request.method == "POST":
+        return render_template("reviews.html")
+    else:
+        return render_template("reviews.html")
