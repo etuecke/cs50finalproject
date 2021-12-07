@@ -1,7 +1,7 @@
 import os
 
 from cs50 import SQL
-from flask import Flask, flash, redirect, render_template, request, session, jsonify
+from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
@@ -10,6 +10,7 @@ from datetime import datetime
 import random
 
 from helpers import apology, login_required, get_details, get_reviews, get_review_details, get_random_movie_list, get_random_years_list, get_random_words, get_poster_url, get_random_movie_from_director
+
 
 # Configure app
 app = Flask(__name__)
@@ -36,11 +37,32 @@ def after_request(response):
 
 
 #TODO: implement homepage
-@app.route("/", methods=["GET", "POST"])
+@app.route("/")
 @login_required
 def index():
     """display homepage"""
-    return render_template("index.html")
+
+    # get movies I've watched
+    query1 = "SELECT movie_title FROM homepageMovies WHERE type =? AND user_id =?"
+    haveWatched = db.execute(query1, "haveWatched", session["user_id"]) # list of dicts that store movie_title 
+    details1 = [] # list of dicts that store directors, stars, rating, year of each movie
+    for i in range(len(haveWatched)):
+        id = db.execute("SELECT id FROM movies WHERE title = ?", haveWatched[i]['movie_title'])[0]['id']
+        details1.append(get_details(id))
+        url = get_poster_url(haveWatched[i]['movie_title'])
+        details1[i]['url'] = url
+    print(haveWatched)
+
+    # get movies to watch
+    query2 = "SELECT movie_title FROM homepageMovies WHERE type =? AND user_id =?"
+    toWatch = db.execute(query2, "toWatch", session["user_id"])
+    details2 = []
+    for movie in toWatch:
+        id = db.execute("SELECT id FROM movies WHERE title = ?", movie['movie_title'])[0]['id']
+        details2.append(get_details(id))
+    # print(toWatch)
+
+    return render_template("index.html", haveWatched = haveWatched, toWatch = toWatch, details1 = details1)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -297,6 +319,7 @@ def search():
             details_list = []
             for movie in movies:
                 details_list.append(get_details(movie["movie_id"]))
+<<<<<<< Updated upstream
             return render_template("searched.html", searched = movies, details = details_list)
 
         # advanced search: searching by ratings 
@@ -323,8 +346,12 @@ def search():
             details_list = []
             for movie in movies:
                 details_list.append(get_details(movie["movie_id"]))
+=======
+>>>>>>> Stashed changes
             return render_template("searched.html", searched = movies, details = details_list)
 
+        # TO DO: searching by ratings
+    
     # User reached route via GET (as by clicking a link or via redirect)
     else: 
         return render_template("search.html")
@@ -351,7 +378,7 @@ def searched():
             if len(rows) == 0:
                 db.execute("INSERT INTO homepageMovies(movie_title, user_id, type) VALUES(?,?,?)", title, session["user_id"], list_type)
 
-        return render_template("/index.html")
+        return redirect("/")
     
 
 @app.route("/news", methods=["GET", "POST"])
