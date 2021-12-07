@@ -47,9 +47,19 @@ This web app was made with Python, Jinja, Flask, HTML, CSS for use on computer a
 ## Design Documentation
 DESIGN.md includes documentation on how we implemented our project and why we made the design decisions we did. 
 
-# Using the website 
-Upon first opening the website, the user will see the login page, in which they need to log in or register for an account. After successfully registrating for an account, a user will be redirected to the login page, where they can then log into their account using the username and password that they created. 
+# Using the Website 
+To receive movie recommendations, search for movies, add movies to their personal lists, or read movie reviews, users must be logged in. Upon first opening the website, the user will see the login page, in which they need to log in or register for an account. After successfully registrating for an account, a user will be redirected to the login page, where they can then log into their account using the username and password that they created. 
 After logging in, users will be able to view the landing page, which displays the movies they have watched and the movies they want to watch. 
 
-## Recieving movie recommendations
-The user can recieve movie recommendations 
+## Recieving Movie Recommendations
+The user can recieve movie recommendations through both the quiz button and the "I'm Feeling Lucky!" button in the top left hand corners. The quiz will have four questions. The first two ask the user to select a movie, the third question will ask the user to select a year, and the last question asks the user to select a word (which is selected randomly from the movie titles). Then, the user will recieve movie recommendations based on their selections. We have filtered the movie options that the quiz will recommend to the user so that the quiz will only return movies that were released after 2010, have over 1000 ratings, and have over 7 stars in the rating. These filters were implemented with the purpose of quality control in the movie recommendations.
+The "I'm Feeling Lucky!" button generates a random movie recommendation from all the movies in the database. 
+
+## Searching for Movies
+The user can search for movies  
+
+## Adding Movies to "Movies I've Seen" and "My Watchlist" 
+this should be easy and if you can't figure it out without this documentation u dumb
+
+## Reading Movie Reviews
+see line 62

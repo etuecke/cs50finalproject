@@ -177,7 +177,6 @@ def get_poster_url(title):
     # Parse response
     try:
         reviews = response.json()
-        print (reviews["results"][0]["image"])
         return reviews["results"][0]["image"]
     except (KeyError, TypeError, ValueError):
         print("here")
