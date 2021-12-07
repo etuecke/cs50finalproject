@@ -5,7 +5,7 @@ consider your design document your opportunity to give the staff a technical tou
 ## Back-end
 
 ### Initial Databasing
-All of the data from this project draws from the movies.db database, containing information on the movies themselves, the directors, the stars, the ratings for the movies, etc. In addition, we set up several more tables in this database that are continuously updated and modified as the user interacts with our website. See the description of these database below:
+All of the data from this project draws from the movies.db database, containing information on the movies themselves, the directors, the stars, the ratings for the movies, etc. In addition, we set up several more tables in this database that are continuously updated and modified as the user interacts with our website. See the description of these tables below:
 1. homepageMovies
     - Fields: movie_title (text), user_id (integer), type (text)
     - This data table is used to populate the homepage information that displays the user's to-watch list and the movies that the user has already watched
@@ -25,11 +25,32 @@ It took a significantly longer time to gather the news data from Google News tha
 
 ### The Flask App
 Let us go through the pages and the design choices and considerations that went into each function:
-1. Index ("~/"): discuss function here
-2. second function here
-3. third function here
-4. fourth function here
-5. News ("~/news"): 
+1. Index ("~/"): 
+    - This homepage uses the homepageMovies table in the movies.db database to populate onto the page that the user has watched already and movies that the user wants to watch
+2. Login ("~/login"), Logout ("~/logout"), and Register ("~/register")
+    - Similar implementation to Finance pset. These functions work with the users table in movies.db to log different users in and out of the application
+3. Quiz pages ("~/quiz", "~/quizQuestion1", "~/quizQuestion2", "~/quizQuestion3", "~/quizQuestion4")
+    - Quiz: This page has a simple 'Start quiz' button that routes the user to the first page of the quiz
+    - Question 1: This function retrieves the title of the movie that the user picks for this question and adds it to the quizTempData table in movies.db. It then generates another series of random movies based on selection criteria defined in helpers.py and sends those movies to the quizQuestion2 html page. 
+    - Question 2: This sends a randomly generated year to the next page, quizQuestion3
+    - Question 3: This page takes a random list of movies and chooses a random word out of their titles. It then takes the original list of movie titles and the random words taken from those tables and send that information to quizQuestion4, where the user will pick their favorite word out of the options provided. 
+    - Question 4: The actual algorithm for computing the movie recommendations is housed in this function, which ends with the list of movie recommendations being sent to the quizResults.html page. 
+    - Movie recommendations algorithm: through querying the quizTempData table in movies.db, we pick movies from the database with similar directors or that were made in the same year as the movies that the user chose. Based on the director/year, we then choose a random movie from the database given these constrained parameters. 
+    - Display: We use web scraping here to get the images of the movie posters, which are displayed along with the title on each page of the quiz
+    - Design Rationale: We chose to split this quiz up into individual html pages per question because this made it easy to store the data from each page in the movies.db database. Having each html page lead to the next question in the quiz fit the aesthetic design that we wanted to create with the quiz. 
+4. Search ("~/search")
+    - The search page allows for two different ways of searching for movies: simply searching by title and searching in a more complicated way by factors like director or who is starring in the movie. 
+    - Implementation Details: The movies database is queried to assemble a list of movies that fits the search criteria. The titles of these movies and various details associated with them are then passed onto the searched.html page, where the search results are actually displayed in table format. 
+5. Searched ("~searched")
+    - The challenge of this page was collecting the movies selected by the user to be added to the homepageMovies table in the database.
+    - The corresponding html file uses JavaScript to determine which movies are selected, and the flask app then inserts that information into the correct table. 
+    - We make sure not to allow duplicate movies to be added into this table for any given user, since this would not make sense when using this table to populate the homepage if there were multiple copies of the movies being displayed.
+    - We redirect directly to the home page.
+6. News ("~/news"): 
+    - Displaying the recent movie news/movie reviews from the New York Times
+7. I'm Feeling Lucky ("/lucky")
+    - This is a simple feature that allows the user to be presented with a randomly chosen movie to watch
+8. Reviews ("~/reviews"):
 
 ### Helpers.py
 1. get_details(): 
@@ -51,6 +72,8 @@ Jinja
 # Built With
 * CS50 IDE
 * VSCode 
+* Sublime + Terminal
+* GitHub
 * Bootstrap
 * NYT and IMDB 
 
