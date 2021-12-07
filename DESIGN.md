@@ -21,12 +21,12 @@ All of the data from this project draws from the movies.db database, containing 
     - DESCRIPTION FOR THIS PAGE
 
 ### Web scraping / API usage
-It took a significantly longer time to gather the news data from Google News than I had anticipated. Initially, I attempted to web scrape with Jupyter Notebook and CoLab but struggled with installing Selenium. When I finally got Selenium to work properly with the webdriver in Jupyter, I found it very difficult to pull information from Google News. Thus, I opted to use the New York Times Dev Portal, which allowed me to access movie reviews through its API. Furthermore, I also used the IMDB API to pull movie posters from the IMDB database, which are displayed along with movie information on the homepage, the quiz, the movie reviews page, and the "I'm Feeling Lucky Page." 
+It took a significantly longer time to gather the news data from Google News than we had anticipated. Initially, we attempted to web scrape with Jupyter Notebook and CoLab but struggled with installing Selenium. When we finally got Selenium to work properly with the webdriver in Jupyter, we found it very difficult to pull information from Google News. Thus, we opted to use the New York Times Dev Portal, which allowed us to access movie reviews through its API. By using the NYT API, we were able to pull data dynamically from the website, so our website updates autonomically when the NYT posts a new review. Furthermore, we also used the IMDB API to pull movie posters from the IMDB database, which are displayed along with movie information on the homepage, the quiz, the movie reviews page, and the "I'm Feeling Lucky Page." 
 
 ### The Flask App
 Let us go through the pages and the design choices and considerations that went into each function:
 1. Index ("~/"): 
-    - This homepage uses the homepageMovies table in the movies.db database to populate onto the page that the user has watched already and movies that the user wants to watch. 
+    - This homepage uses the homepageMovies table in the movies.db database to populate onto the page that the user has watched already and movies that the user wants to watch. It also uses the helper function get_details() to get details (directors, year, rating, and stars) of each movie and displays them to the user. The function also uses the helper function get_poster_url() to pull the movie poster image from the IMDB database. 
 2. Login ("~/login"), Logout ("~/logout"), and Register ("~/register")
     - The implementation of these are similar to the Finance pset. These functions work with the users table in movies.db to log different users in and out of the application.
 3. Quiz pages ("~/quiz", "~/quizQuestion1", "~/quizQuestion2", "~/quizQuestion3", "~/quizQuestion4")
@@ -47,19 +47,19 @@ Let us go through the pages and the design choices and considerations that went 
     - We make sure not to allow duplicate movies to be added into this table for any given user, since this would not make sense when using this table to populate the homepage if there were multiple copies of the movies being displayed.
     - We redirect directly to the home page.
 6. News ("~/news"): 
-    - Displaying the recent movie news/movie reviews from the New York Times.
+    - This function uses the helper functions get_reviews() and get_review_details() to pull recent movie reviews from the New York Times. 
 7. I'm Feeling Lucky ("/lucky")
-    - This is a simple feature that allows the user to be presented with a randomly chosen movie to watch.
+    - This is a feature that allows the user to be presented with a randomly chosen movie to watch. The function randomly sorts all the movies in the movies table in the database and selects the first item to display to the user. 
 8. Reviews ("~/reviews"):
+** KRISHAAAAAAAAA **
 
 ### Helpers.py
 1. get_details():
     - We included this helper function to make it easy to assemble all relevant information about a movie, without having to copy and paste the queries required to do so over and over. 
-    - This helper function retrieves information about the directors, the stars, the movie rating, the year the movie was made, etc. using SQL queries
+    - This helper function retrieves information about the directors, the stars, the movie rating, the year the movie was made, etc. using SQL queries.
 2. get_reviews() and get_review_details(): 
-    - get_reviews(): KELSEY ADD SMTH HERE
-    - get_review_details(): KELSEY ADD SMTH HERE 
-    - GO INTO DEPTH ON HOW THE WEB SCRAPING STUFF HERE WORKS 
+    - get_reviews(): this function contacts the New York Times API to retrieve a json that contains data on the most recent movie reviews published by the NYT. The function then parses the results to return a list of all reviews and their details (movie_title, byline, headline, mpaa_rating, etc.). 
+    - get_review_details(): this function picks relevant details (headline, byline, summary, date, and link to the image) from the list of reviews. 
 3. Helper functions for the quiz: 
     - get_random_movie_list()
     - get_random_years_list()
@@ -67,7 +67,7 @@ Let us go through the pages and the design choices and considerations that went 
     - get_random_movie_from_director()
     - The quiz requires multiple queries to get random movie titles/random years/random words out of movie titles. To prevent code duplication, we placed all of these SQL queries in the helper functions file. 
 4. get_poster_url(): 
-    - This function contacts the IMDB API, searches for the movie title using the API key, and parses the results to return the poster url. 
+    - This function contacts the IMDB API, searches for the movie title, and parses the results to return the poster url. 
     - The url is then used in the src attribute of the image of the relevant html pages to display the image to the user.  
     - This helper function is called frequently in our application any time we need to display a poster image for a movie along with the title of the movie 
 
@@ -77,7 +77,7 @@ Let us go through the pages and the design choices and considerations that went 
 Along with the web scraping part of this project, designing the front end and getting the template files to properly interface with our flask app took the most time. In particular, we spent a fair amount of time on correctly passing information between pages and interfacing with the database, since we had not done much of this in class. 
 See below the list of design decisions made with respect to the more complicated of these templates.
 1. index.html
-    - We used jinja to pass information from the
+    - We used jinja to iterate through the user's haveWatched and toWatch lists, ultimately displaying 
 2. layout.html
     - ANY BOOTSTRAP STUFF?
 3. news.html
