@@ -59,7 +59,7 @@ This web app was made with Python, Jinja, Flask, HTML, CSS, and Javascript for u
 * key.txt: 
     - a text file that contains the API keys needed for the New York Times movie reviews and the IMDB movie posters. 
 * movies.db: 
-    - SQLite database containing [EVA TALK ABOUT ALL THESE TABLES!!!!!!!!!!!!!!!!!!!!] tables from which the main functionality of the app draws from.  
+    - SQLite database containing tables from which the main functionality of the app draws from.  
 
 ## Design Documentation
 DESIGN.md includes documentation on how we implemented our project and why we made the design decisions we did. 
