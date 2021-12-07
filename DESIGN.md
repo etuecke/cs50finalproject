@@ -51,7 +51,7 @@ Let us go through the pages and the design choices and considerations that went 
 7. I'm Feeling Lucky ("/lucky")
     - This is a feature that allows the user to be presented with a randomly chosen movie to watch. The function randomly sorts all the movies in the movies table in the database and selects the first item to display to the user. 
 8. Reviews ("/reviews"):
-** KRISHAAAAAAAAA **
+*KRISHAAAAAAAAA*
 
 ### Helpers.py
 1. get_details():
