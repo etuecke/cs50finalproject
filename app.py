@@ -319,7 +319,6 @@ def search():
             details_list = []
             for movie in movies:
                 details_list.append(get_details(movie["movie_id"]))
-<<<<<<< Updated upstream
             return render_template("searched.html", searched = movies, details = details_list)
 
         # advanced search: searching by ratings 
@@ -346,8 +345,7 @@ def search():
             details_list = []
             for movie in movies:
                 details_list.append(get_details(movie["movie_id"]))
-=======
->>>>>>> Stashed changes
+
             return render_template("searched.html", searched = movies, details = details_list)
 
         # TO DO: searching by ratings
