@@ -9,16 +9,69 @@
                 <th>Year</th>
                 <th>Directors</th>
                 <th>Stars</th>
+                <th>Select</th> 
             </tr>
+            <input type="hidden" id="toWatch" name="toWatch" value="None">
+            <input type="hidden" id="haveWatched" name="haveWatched" value="None">
+            <input type="hidden" id="list" name="list" value="None">
             {% for movie in searched %}
                 <tr>
                     <td>{{ movie.title }}</td>
                     <td>{{ movie.year }}</td>
                     <td>{{ details[loop.index0].directors }}</td>
                     <td>{{ details[loop.index0].stars }}</td>
+                    <td><input type="checkbox" value="{{ movie.title }}" id="check" name="check"></td>
                 </tr>
             {% endfor %}
         </table>
+
+        <br>
+        <br>
+
+        <button class="button" type="submit" name="watch_list" id="watch_list" onclick="toWatch()">Add to Watch List</button>
+        <button class="button" type="submit" name="have_watched" id="have_watched" onclick="haveWatched()">Have Watched</button>
+        
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+        <script>
+
+            var toWatch_clicked = false;
+            var haveWatched_clicked = false;
+
+            document.getElementById("watch_list").onclick = function() {toWatch()};
+            document.getElementById("have_watched").onclick = function() {haveWatched()};
+
+
+            $(document).ready(function() {
+                $("button").click(function(){
+                    var favorite = [];
+                    $.each($("input[name='check']:checked"), function(){
+                        favorite.push($(this).val());
+                    });
+                    if(toWatch_clicked == true) {
+                        document.getElementById("toWatch").value = favorite;
+                        document.getElementById("list").value = "toWatch";
+                        toWatch_clicked = false;
+                    }
+                    if(haveWatched_clicked == true) {
+                        document.getElementById("haveWatched").value = favorite;
+                        document.getElementById("list").value = "haveWatched";
+                        haveWatched_clicked = false;
+                    }
+                });
+            });
+           
+            function toWatch() {
+                toWatch_clicked = true;
+                console.log("toWatch");
+            }
+
+            function haveWatched() {
+                haveWatched_clicked = true;
+                console.log("haveWatched");
+            }
+        </script>
+
     </div>
 </form>
 {% endblock %}
