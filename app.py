@@ -283,7 +283,7 @@ def search():
                                 " WHERE people.name = ?", director)
             details_list = []
             for movie in movies:
-                details_list.append(get_details(movie["id"]))
+                details_list.append(get_details(movie["movie_id"]))
             return render_template("searched.html", searched = movies, details = details_list)
             
 
@@ -296,22 +296,33 @@ def search():
                                 " WHERE people.name = ?", star)
             details_list = []
             for movie in movies:
-                details_list.append(get_details(movie["id"]))
+                details_list.append(get_details(movie["movie_id"]))
             return render_template("searched.html", searched = movies, details = details_list)
 
         # advanced search: searching by ratings 
-        elif request.form.get("to") and (request.form.get("from")) and ((request.form.get("starring")) or (not request.form.get("director"))):
+        elif request.form.get("to") and (request.form.get("from")) and ((request.form.get("starring")) or (request.form.get("director"))):
             lower_bound = request.form.get("from")
             upper_bound = request.form.get("to")
 
             if request.form.get("starring"):
+                star = request.form.get("starring")
                 movies = db.execute("SELECT * FROM movies "
                                     " INNER JOIN ratings ON movies.id = ratings.movie_id "
-                                    " WHERE rating BETWEEN ? AND ?", lower_bound, upper_bound)
-                                               
+                                    " INNER JOIN stars ON movies.id = stars.movie_id "
+                                    " INNER JOIN people ON stars.person_id = people.id "
+                                    " WHERE ((ratings.rating BETWEEN ? AND ?) AND people.name = ?)", lower_bound, upper_bound, star)
+
+            if request.form.get("director"):
+                director = request.form.get("director")
+                movies = db.execute("SELECT * FROM movies "
+                                    " INNER JOIN ratings ON movies.id = ratings.movie_id "
+                                    " INNER JOIN directors ON movies.id = directors.movie_id "
+                                    " INNER JOIN people ON directors.person_id = people.id "
+                                    " WHERE ((ratings.rating BETWEEN ? AND ?) AND people.name = ?)", lower_bound, upper_bound, director)
+
             details_list = []
             for movie in movies:
-                details_list.append(get_details(movie["id"]))
+                details_list.append(get_details(movie["movie_id"]))
             return render_template("searched.html", searched = movies, details = details_list)
 
     # User reached route via GET (as by clicking a link or via redirect)
