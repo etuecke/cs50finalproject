@@ -36,6 +36,7 @@ def after_request(response):
     return response
 
 
+#TODO: implement homepage
 @app.route("/")
 @login_required
 def index():
@@ -48,10 +49,19 @@ def index():
 
     if len(haveWatched) != 0:
         for i in range(len(haveWatched)):
+            # add directors, stars, rating, year of each movie to details1
             id = db.execute("SELECT id FROM movies WHERE title = ?", haveWatched[i]['movie_title'])[0]['id']
             details1.append(get_details(id))
+
+            # add image url of each movie to details1
             url = get_poster_url(haveWatched[i]['movie_title'])
             details1[i]['url'] = url
+            
+            #add movie title of each movie to details1
+            title = haveWatched[i]['movie_title']
+            details1[i]['title'] = title
+
+    print(haveWatched)
 
     # get movies to watch
     query2 = "SELECT movie_title FROM homepageMovies WHERE type =? AND user_id =?"
@@ -61,8 +71,14 @@ def index():
         for i in range(len(toWatch)):
             id = db.execute("SELECT id FROM movies WHERE title = ?", toWatch[i]['movie_title'])[0]['id']
             details2.append(get_details(id))
+            
+            # add image url of each movie to details2
             url = get_poster_url(toWatch[i]['movie_title'])
             details2[i]['url'] = url
+
+            #add movie title of each movie to details1
+            title = toWatch[i]['movie_title']
+            details2[i]['title'] = title
 
     return render_template("index.html", haveWatched = haveWatched, toWatch = toWatch, details1 = details1, details2 = details2)
 
