@@ -9,41 +9,54 @@
         <!--Show movies I've seen and recommended movies-->
         <div class="mb-3">
                 <h1>Movies I've Seen</h2>
-                <div class="news-container">
-                    {% for detail in details1 %}
-                        <div class="flex-item">
-                            <div class="card" style="width: 18rem;">
-                                <img class="card-img-top" src={{detail.url}} alt="Card image cap">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{detail.title}}</h5>
-                                    <p class="card-text">{{detail.year[0].get('year')}}</p>
-                                    <p class="card-text">Rating: {{detail.rating[0].get('rating')}}</p>
-                                    <p class="card-text">Directed by: {% for director in detail.directors %}{{ director }} | {% endfor %}</p>
-                                    <p class="card-text">Starring: {% for star in detail.stars %}{{ star }} | {% endfor %}</p>
+                {% if details1|length > 1 %}
+                    <div class="news-container">
+                        {% for detail in details1 %}
+                            <div class="flex-item">
+                                <div class="card" style="width: 18rem;">
+                                    <img class="card-img-top" src={{detail.url}} alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{detail.title}}</h5>
+                                        <p class="card-text">{{detail.year[0].get('year')}}</p>
+                                        <p class="card-text">Rating: {{detail.rating[0].get('rating')}}</p>
+                                        <p class="card-text">Directed by: {% for director in detail.directors %}{{ director }} | {% endfor %}</p>
+                                        <p class="card-text">Starring: {% for star in detail.stars %}{{ star }} | {% endfor %}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    {% endfor %}
-                </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <br/>
+                    <h5>Add some movies using the Search Page!</h5>
+                {% endif %}
                 <br/>
                 <br/>
                 <h1>My Watchlist</h2>
-                <div class="news-container">
-                    {% for detail in details2 %}
-                        <div class="flex-item">
-                            <div class="card" style="width: 18rem;">
-                                <img class="card-img-top" src={{detail.url}} alt="Card image cap">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{detail.title}}</h5>
-                                    <p class="card-text">{{detail.year[0].get('year')}}</p>
-                                    <p class="card-text">Rating: {{detail.rating[0].get('rating')}}</p>
-                                    <p class="card-text">Directed by: {% for director in detail.directors %}{{ director }} | {% endfor %}</p>
-                                    <p class="card-text">Starring: {% for star in detail.stars %}{{ star }} | {% endfor %}</p>
+                {% if details2|length > 1 %}
+                    <div class="news-container">
+                        {% for detail in details2 %}
+                            <div class="flex-item">
+                                <div class="card" style="width: 18rem;">
+                                    <img class="card-img-top" src={{detail.url}} alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{detail.title}}</h5>
+                                        <p class="card-text">{{detail.year[0].get('year')}}</p>
+                                        <p class="card-text">Rating: {{detail.rating[0].get('rating')}}</p>
+                                        <p class="card-text">Directed by: {% for director in detail.directors %}{{ director }} | {% endfor %}</p>
+                                        <p class="card-text">Starring: {% for star in detail.stars %}{{ star }} | {% endfor %}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    {% endfor %}
-                </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <br/>
+                    <h5>Add some movies using the Search Page! To get custom quiz recommendations, take The Quiz. Or, if
+                        you would like a random movie recommendation, click the "I'm Feeling Lucky!" button at the top 
+                        of this page.
+                    </h5>
+                {% endif %}
         </div>
     </form>
 

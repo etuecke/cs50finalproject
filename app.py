@@ -61,8 +61,6 @@ def index():
             title = haveWatched[i]['movie_title']
             details1[i]['title'] = title
 
-    print(haveWatched)
-
     # get movies to watch
     query2 = "SELECT movie_title FROM homepageMovies WHERE type =? AND user_id =?"
     toWatch = db.execute(query2, "toWatch", session["user_id"]) # list of dicts that store movie_title 
