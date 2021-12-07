@@ -6,7 +6,7 @@ Welcome to Cinema Central! This website and web application offers movie suggest
 # Getting Started
 
 ## Pre-requisites
-This web app was made with Python, Jinja, Flask, HTML, CSS for use on computer and mobile.
+This web app was made with Python, Jinja, Flask, HTML, CSS, and Javascript for use on computer and mobile.
 
 ## Installing
 1. Upload the files downloaded from Gradescope in the CS50 IDE or your preferred development environment or clone this github repository at https://github.com/etuecke/cs50finalproject.
@@ -23,29 +23,31 @@ This web app was made with Python, Jinja, Flask, HTML, CSS for use on computer a
 * apology.html: 
     - an HTML page that displays whatever error the user may run into.
 * index.html: 
-    - the landing page that links users to other pages and log in.
+    - the landing page that links users to other pages
+    - if a user is logged in, it displays movies the user has watched and the user's watchlist
 * layout.html: 
     - the base HTML page used as a template for the rest of the HTML pages
 * login.html: 
-    - similar to finance
+    - the login page that allows users to log into their accounts
 * lucky.html:
-    - random movie presented to user
+    - an HTML page that displays a random movie presented to user
 * news.html:
-    - uses webscraping to give user recent movie news /recommendations from the New York Times 
+    - an HTML page that reads from the New York Times API to give the user recent movie reviews from the New York Times 
 * quiz.html: 
-    - starter page for quiz
+    - the starter page for quiz
 * quizQuestion1 
 * quizQuestion2
 * quizQuestion3
 * quizQuestion4
 * quizResults:
+    - an HTML page that displays movie recommendations based on the user's responses to the quiz
 * register.html:
-    - similar to finance
+    - the registration page that allows a user to register for a new account
 * search.html: 
-    - page where the user can input searching criteria 
+    - an HTML page where the user can input search criteria to find movies
 * searched.html: 
-    - displays the results from the search page
-    - allows users to select movies and add them to the homepageMovies database under various categories
+    - an HTML page that displays the results from the search page
+    - allows users to select movies and add them to movies they have watched or their watchlist
 * reviews.html:
     - allows users to write reviews and also view the reviews written by other users
 
@@ -67,18 +69,17 @@ To receive movie recommendations, search for movies, add movies to their persona
 After logging in, users will be able to view the landing page, which displays the movies they have watched and the movies they want to watch. 
 
 ## Recieving Movie Recommendations
-The user can recieve movie recommendations through both the quiz button and the "I'm Feeling Lucky!" button in the top left hand corners. The quiz will have four questions. The first two ask the user to select a movie, the third question will ask the user to select a year, and the last question asks the user to select a word (which is selected randomly from the movie titles). Then, the user will recieve movie recommendations based on their selections. We have filtered the movie options that the quiz will recommend to the user movies that were released after 2010, have over 1000 ratings, and have over 7 stars in the rating. These filters were implemented with the purpose of quality control in the movie recommendations.
-The "I'm Feeling Lucky!" button generates a random movie recommendation from all the movies in the database. 
-
-## Searching for Movies
-The user can search for movies  
+The user can recieve movie recommendations through both the quiz button and the "I'm Feeling Lucky!" button in the top left hand corners. The quiz will have four questions. The first two ask the user to select a movie, the third question will ask the user to select a year, and the last question asks the user to select a word (which is selected randomly from the movie titles). Then, the user will recieve movie recommendations based on their selections. We have filtered the movie options that the quiz will recommend to the user movies that were released after 1990, have over 1000 ratings, and have over 7 stars in the rating. These filters were implemented with the purpose of quality control in the movie recommendations.
+The "I'm Feeling Lucky!" button generates a random movie recommendation from all the movies in the database.   
 
 ## Adding Movies to "Movies I've Seen" and "My Watchlist" 
-this should be easy and if you can't figure it out without this documentation u dumb
+To add movies to "Movies I've Seen" or "My Watchlist", users can find specific movies through the search page. The user can simply search a movie by the title or use the advanced search function. With advanced search, the user can search by title, star, or user rating (provided they also search a director or star when searching by user rating). When the results of their search comes up, users can select movies from the list and add them to "Movies I've Seen" or "My Watchlist." 
+
+## Getting Movie Reviews
+To view the most recent movie reviews from the New York Times, users can navigate to the News page. If the user would like to read the full review, they can click on the "Read More" button, which will direct them to the New York Times article. 
 
 ## Writing Movie Reviews and Interacting With Other Users
-add details here 
-this should be about the reviews page where users can write their own reviews/read reviews
+Users can read and write moview reviews on the Moview Reviews page. The user must first write and post a review to see reviews written by other users. To write a review, the user must fill out the form under "Add a New Review" and click the "Add New Review Button." After submitting the review, users will be able to see the Reviews Log, which displays the movie reviews written by all users. 
 
-## Getting Movie News and Reviews (Webscraped)
-add details here about news page
+## Logging Out
+To log out of the website, the user can click on "Log Out" on the navigation bar in the top right.
