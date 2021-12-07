@@ -35,10 +35,8 @@ This web app was made with Python, Jinja, Flask, HTML, CSS, and Javascript for u
     - an HTML page that reads from the New York Times API to give the user recent movie reviews from the New York Times 
 * quiz.html: 
     - the starter page for quiz
-* quizQuestion1 
-* quizQuestion2
-* quizQuestion3
-* quizQuestion4
+* quizQuestion1, quizQuestion2, quizQuestion3, quizQuestion4
+    - HTML pages that display the quiz questions
 * quizResults:
     - an HTML page that displays movie recommendations based on the user's responses to the quiz
 * register.html:
