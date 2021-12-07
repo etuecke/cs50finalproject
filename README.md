@@ -19,4 +19,32 @@ This web app was made with Python, Jinja, Flask, HTML, CSS for use on computer a
 
 # The Directory 
 
+## Templates Directory
+* apology.html: an HTML page that displays whatever error the user may run into.
+* details.html: [REMOVE THIS IF WE DON'T END UP USING IT!!!!]
+* index.html: the landing page that links users to other pages and log in.
+* layout.html: the base HTML page used as a template for the rest of the HTML pages
+* login.html: 
+* lucky.html:
+* news.html:
+* quiz.html: 
+* quizQuestion1: 
+* quizQuestion2: 
+* quizQuestion3: 
+* quizQuestion4: 
+* quizResults:
+* recommendations.html: 
+* register.html:
+* search.html:
+* searched.html: 
+
+## Root Directory
+* helpers.py: a helper file that contains python functions that used in app.py. Methods include the apology function, getting movie reviews, and pulling poster images. 
+* app.py: the main python file containing routes to all pages of the web application. 
+* key.txt: a text file that contains the API keys needed for the New York Times movie reviews and the IMDB movie posters. 
+* movies.db: SQLite database containing [EVA TALK ABOUT ALL THESE TABLES!!!!!!!!!!!!!!!!!!!!] tables from which the main functionality of the app draws from.  
+
+## Design Documentation
+DESIGN.md includes documentation on how we implemented our project and why we made the design decisions we did. 
+
 # Using the website 
