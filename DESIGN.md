@@ -41,7 +41,7 @@ Let us go through the pages and the design choices and considerations that went 
 4. Search ("/search")
     - The search page allows for two different ways of searching for movies: simply searching by title and searching in a more complicated way by factors like director or who is starring in the movie. 
     - Implementation Details: The movies database is queried to assemble a list of movies that fits the search criteria. The titles of these movies and various details associated with them are then passed onto the searched.html page, where the search results are actually displayed in table format. 
-5. Searched ("searched")
+5. Searched ("/searched")
     - The challenge of this page was collecting the movies selected by the user to be added to the homepageMovies table in the database.
     - The corresponding html file uses JavaScript to determine which movies are selected, and the flask app then inserts that information into the correct table. 
     - We make sure not to allow duplicate movies to be added into this table for any given user, since this would not make sense when using this table to populate the homepage if there were multiple copies of the movies being displayed.
@@ -52,6 +52,7 @@ Let us go through the pages and the design choices and considerations that went 
     - This is a feature that allows the user to be presented with a randomly chosen movie to watch. The function randomly sorts all the movies in the movies table in the database and selects the first item to display to the user. 
 8. Reviews ("/reviews"):
     - This function allows users to add to the reviews table in the movies database. We take two inputs from the user, movie title and review. If movie title is left blank or if the title is not in the database, the review will not be added to the reviews table. The contents of this table will then be displayed in reviews.html once the user "Add New Review."
+
 
 ### Helpers.py
 1. get_details():
@@ -99,6 +100,11 @@ See below the detailed list of design decisions we made for each html page.
 7. reviews.html
     - We designed a reviews page where users could both leave a review for a movie they've watched before, and read those of others (once they've left at least one review). 
     - This feature allows users to see content from other users. 
+8. visualizations.html, visualizations2.html
+    - These data visualization features were implemented using the data visualzation software **Tableau Public**. Learning to use this software and integrating it with our website was one of the more time consuming parts of this project.
+    - The first visualization page allows for viewers to see how many movies each director directed in an interactive format. We chose to embed this visualization directly into our website. 
+    - The second type of visualization displays information about both movie ratings and movie reviews. The size of the bubbles represents the number of votes that were recieved for each move, and the color represents the rating. Once again, this is an interactive visual that is embedded directly in our website. 
+    - We chose to implement these visuals because we want to provide users with a way to interact much more directly with the data in our datatbase. 
 
 ### Design Process 
 We spent a significant amount of time in the ideation process and underwent several brainstorming sessions to discuss how the website would look and how we planned to structure the code. We created a couple low-fidelity prototypes to visualize the page layouts, ultimately choosing the one we implemented. 
@@ -110,10 +116,11 @@ In the implementation of the design, we took advantage of the flex containers an
 # Built With
 * CS50 IDE
 * VSCode 
-* Sublime Text + Terminal
+* Sublime Text and Terminal
 * Bootstrap
-* NYT and IMDB APIs
-* Tableau Public 
+* NYT API
+* IMDB API
+* Tableau Public and Tableau Desktop
 * GitHub
 
 
@@ -121,4 +128,6 @@ In the implementation of the design, we took advantage of the flex containers an
 * https://developer.nytimes.com/apis
 * https://imdb-api.com/
 * https://www.w3schools.com/ 
-* https://jsonformatter.curiousconcept.com/# JSON formatting website used to format the result of the API request from the NYT website. 
+* https://jsonformatter.curiousconcept.com/# JSON formatting website used to format the result of the API request from the NYT website.
+* Stack Overflow
+* Tableau Public documentation
