@@ -51,7 +51,7 @@ Let us go through the pages and the design choices and considerations that went 
 7. I'm Feeling Lucky ("/lucky")
     - This is a feature that allows the user to be presented with a randomly chosen movie to watch. The function randomly sorts all the movies in the movies table in the database and selects the first item to display to the user. 
 8. Reviews ("/reviews"):
-**KRISHAAAAAAAAA**
+    - This function allows users to add to the reviews table in the movies database. We take two inputs from the user, movie title and review. If movie title is left blank or if the title is not in the database, the review will not be added to the reviews table. The contents of this table will then be displayed in reviews.html once the user "Add New Review."
 
 ### Helpers.py
 1. get_details():
@@ -88,7 +88,7 @@ See below the list of design decisions made with respect to the more complicated
     - Jinja was used to prevent code duplication, as we used for loops to populate the flex containers.
     - Hidden input fields were used to send information back to the flask app, where it could be added to the correct table(s) in the database.
 5. search.html
-    - We designed a search page with multiple search options for the user to take advantage of. 
+    - We designed a search page with multiple search options for the user to take advantage of. After the user submits the form, we implemented several SQL queries, taking advantage of INNER JOIN to combine tables and search the movies database for movies that fit the criteria.  
 6. searched.html
     - Using the search results, this html page populates the search data into a table that displays information like the movie title, the director(s), and the stars of the movie. It also adds a checkbox next to every row, which can be used to select multiple movies at once and add them to the watch list of have watched list (populated on the home page)
     - We used JavaScript to determine which movies had been selected and which button had been clicked (which determines which list to add the selected movies to).
@@ -111,7 +111,7 @@ In the implementation of the design, we took advantage of the flex containers an
 * VSCode 
 * Sublime Text + Terminal
 * Bootstrap
-* NYT and IMDB 
+* NYT and IMDB APIs
 * Tableau Public 
 * GitHub
 
