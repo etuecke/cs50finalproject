@@ -13,7 +13,7 @@ This web app was made with Python, Jinja, Flask, HTML, CSS, and Javascript for u
 
 2. Use the command line and enter the main directory of the root folder of the project, "cd cs50finalproject".
 
-3. Export the api keys in the key.txt file by using the command line. Enter "export API_KEY=pk_126ad0f16a4440abbd2524ec7f394a03" and "export NYT_KEY=UdslRxWT1wfX4mt8zWgpX7v5gOADWTos" in the main directory of the root folder. 
+3. Export the api keys in the key.txt file by using the command line. Enter "export API_KEY=UdslRxWT1wfX4mt8zWgpX7v5gOADWTos" and "export IMDB_KEY=k_54zd2ctl" in the main directory of the root folder. 
 
 4. Use "flask run" to view a local version of the file.
 
