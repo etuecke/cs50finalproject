@@ -17,8 +17,9 @@ All of the data from this project draws from the movies.db database, containing 
     - This data is then accessed in the algorithm that makes movie recommendations to the user at the end of the quiz. 
 3. users:
     - The users table tracks information on various users that login to the platform. This particular table works similarly as the login implementation for the 'Finance' pset worked.
-4. **INCLUDE THE NEW TABLE FOR THE REVIEWS PAGE**
-    - **DESCRIPTION FOR THIS PAGE**
+4. reviews:
+    - Fields: id (integer), username (text), title (text), review (text), datetime (datetime, current timestamp)
+    - This table is used to store the reviews written by the different users. It is used to print all of the reviews on the page regardless of the user that is logged in. 
 
 ### Web scraping / API usage
 It took a significantly longer time to gather the news data from Google News than we had anticipated. Initially, we attempted to web scrape with Jupyter Notebook and CoLab but struggled with installing Selenium. When we finally got Selenium to work properly with the webdriver in Jupyter, we found it very difficult to pull information from Google News. Thus, we opted to use the New York Times Dev Portal, which allowed us to access movie reviews through its API. By using the NYT API, we were able to pull data dynamically from the website, so our website updates autonomically when the NYT posts a new review. Furthermore, we also used the IMDB API to pull movie posters from the IMDB database, which are displayed along with movie information on the homepage, the quiz, the movie reviews page, and the "I'm Feeling Lucky Page." 

@@ -374,6 +374,7 @@ def search():
 def searched():
     if request.method == "POST":
 
+        # get list of all movies that were selected, toWatch or haveWatched
         titles = ""
         list_type = request.form.get("list")
 
@@ -383,6 +384,7 @@ def searched():
         elif (list_type == "haveWatched"):
             titles = request.form.get("haveWatched")
 
+        # splits into separate movie titles by the comma
         title_list = titles.split(",")
 
         # add information into homepage database 
