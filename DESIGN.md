@@ -75,11 +75,12 @@ Let us go through the pages and the design choices and considerations that went 
 
 ### Design Decisions for HTML Templates 
 Along with the web scraping part of this project, designing the front end and getting the template files to properly interface with our flask app took the most time. In particular, we spent a fair amount of time on correctly passing information between pages and interfacing with the database, since we had not done much of this in class. 
-See below the list of design decisions made with respect to the more complicated of these templates.
+See below the detailed list of design decisions we made for each html page.
 1. index.html
-    - We used jinja to iterate through the user's haveWatched and toWatch lists, ultimately displaying the movie posters and details on the user's page. 
+    - We used jinja to iterate through the user's haveWatched and toWatch lists. Jinja allowed us to pass information such as the movie title, year, rating, director(s), and stars to the html page. The page ultimately displays the movie posters and details on the user's homepage. 
 2. layout.html
     - This was an adapted layout.html file from the finance pset. We customized the navigation bar to display navigation items for each of our pages and changed the color of the bar to match our color scheme. 
+    - The rest of the html pages extend this base html page. 
 3. news.html
     - We used Jinja to loop through reviews that were pulled using our helper functions. 
     - The news page uses Bootstrap's card, grid, and flex properties to display movie reviews from the New York Times and resize items dynamically to fit all screen sizes. 
