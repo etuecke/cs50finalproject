@@ -79,7 +79,9 @@ To add movies to "Movies I've Seen" or "My Watchlist", users can find specific m
 To view the most recent movie reviews from the New York Times, users can navigate to the News page. If the user would like to read the full review, they can click on the "Read More" button, which will direct them to the New York Times article itself.
 
 ## Viewing Movie-Related Data Visualizations
-Users can interact with and view data visualizations of information encompassed in the movies database, things like the number of movies directed by each director, and a unique representation of all the movies in the database by the number of rating votes they've received and their actual ratings. 
+Users can interact with and view data visualizations of information encompassed in the movies database. We included two different visualizations: 
+1. Number of movies directed by each director 
+2. The ratings and number of votes that each movie recieved 
 
 ## Writing Movie Reviews and Interacting With Other Users
 Users can read and write moview reviews on the Moview Reviews page. The user must first write and post a review to see reviews written by other users. To write a review, the user must fill out the form under "Add a New Review" and click the "Add New Review Button." After submitting the review, users will be able to see the Reviews Log, which displays the movie reviews written by all users. 
