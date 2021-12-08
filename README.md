@@ -3,7 +3,7 @@ Kelsey Chen, Krisha Patel, Eva Tuecke
 
 Welcome to Cinema Central! This website and web application offers movie suggestions, displays real-time reviews on movies, lets users write movie reviews, and allows users to search and save movies on their watchlist.
 
-**See the video walk-through of our website here:** https://youtu.be/rMg5qKb0IM4
+**See the video walk-through of our website here:** https://youtu.be/at-D0hY8B3k
 
 # Getting Started
 
