@@ -1,7 +1,7 @@
 # Cinema Central
 Kelsey Chen, Krisha Patel, Eva Tuecke
 
-Welcome to Cinema Central! This website and web application offers movie suggestions, displays real-time reviews on movies, and allows users to search and save movies on their watchlist. 
+Welcome to Cinema Central! This website and web application offers movie suggestions, displays real-time reviews on movies, lets users write movie reviews, and allows users to search and save movies on their watchlist.
 
 # Getting Started
 
@@ -21,41 +21,45 @@ This web app was made with Python, Jinja, Flask, HTML, CSS, and Javascript for u
 
 ## Templates Directory
 * apology.html: 
-    - an HTML page that displays whatever error the user may run into.
+    - An HTML page that displays whatever error the user may run into
 * index.html: 
-    - the landing page that links users to other pages
-    - if a user is logged in, it displays movies the user has watched and the user's watchlist after they've added those from the search page results
+    - The landing page that links users to other pages
+    - If a user is logged in, it displays movies the user has watched and the user's watchlist after they've added those from the search page results
 * layout.html:
-    - the base HTML page used as a template for the rest of the HTML pages
+    - The base HTML page used as a template for the rest of the HTML pages
 * login.html: 
-    - the login page that allows users to log into their accounts
+    - The login page that allows users to log into their accounts
 * lucky.html:
-    - an HTML page that displays a random movie presented to user (movie details and poster)
+    - An HTML page that displays a random movie presented to user (movie details and poster)
 * news.html:
-    - an HTML page that reads from the New York Times API to give the user recent movie reviews from the New York Times 
+    - An HTML page that reads from the New York Times API to give the user recent movie reviews from the New York Times 
 * quiz.html: 
-    - the starter page for quiz
+    - The landing page for quiz
 * quizQuestion1, quizQuestion2, quizQuestion3, quizQuestion4
     - HTML pages that display the quiz questions
 * quizResults:
-    - an HTML page that displays movie recommendations based on the user's responses to the quiz
+    - An HTML page that displays movie recommendations based on the user's responses to the quiz
 * register.html:
-    - the registration page that allows a user to register for a new account
+    - The registration page that allows a user to register for a new account
 * search.html: 
-    - an HTML page where the user can input search criteria to find movies
+    - An HTML page where the user can input search criteria to find movies
 * searched.html: 
-    - an HTML page that displays the results from the search page
-    - allows users to select movies and add them to movies they have watched or their watchlist
+    - An HTML page that displays the results from the search page
+    - Allows users to select movies and add them to movies they have watched or their watchlist
 * reviews.html:
-    - allows users to write reviews and also view the reviews written by other users
+    - Allows users to write reviews and also view the reviews written by other users
+* visualizations.html:
+    - Displays interactive visualization for the number of movies each director has directed
+* visualizations2.html:
+    - Displays interactive visualization for the ratings and votes for each movie
 
 ## Root Directory
 * helpers.py: 
-    - a helper file that contains python functions that used in app.py. Methods amongst others include the apology function, getting movie reviews, and pulling poster images. 
+    - A helper file that contains python functions that used in app.py. Methods amongst others include the apology function, getting movie reviews, and pulling poster images. 
 * app.py: 
-    - the main python file containing routes to all pages of the web application. 
+    - The main python file containing routes to all pages of the web application. 
 * key.txt: 
-    - a text file that contains the API keys needed for the New York Times movie reviews and the IMDB movie posters. 
+    - A text file that contains the API keys needed for the New York Times movie reviews and the IMDB movie posters. 
 * movies.db: 
     - SQLite database containing tables of basic movie details, director information, stars information, etc. from which the main functionality of the app draws from
 
@@ -65,10 +69,10 @@ DESIGN.md includes documentation on how we implemented our project and why we ma
 # Using the Website 
 To receive movie recommendations, search for movies, add movies to their personal lists, or read movie reviews, users must be logged in. Upon first opening the website, the user will see the login page, in which they need to log in or register for an account. After successfully registrating for an account, a user will be redirected to the login page, where they can then log into their account using the username and password that they created. 
 
-After logging in, users will be able to view the landing page, which displays the movies they have watched and the movies they want to watch. If this is a user's first time on the website, then they will not see their watched movies or want to watch movies lists populated. In order to do so, they must navigate to other parts of the website and utilize the search function to add more information to their preferences profile. 
+After logging in, users will be able to view the landing page, which displays the movies they have watched and the movies they want to watch. If this is a user's first time on the website, then they will not see their "watched" movies or "want to watch" movies lists populated. In order to do so, they must navigate to other parts of the website and utilize the search function to add more information to their profile. 
 
 ## Recieving Movie Recommendations
-The user can recieve movie recommendations through both the quiz button and the "I'm Feeling Lucky!" button in the top left hand corners. The quiz will have four questions. The first two ask the user to select a movie, the third question will ask the user to select a year, and the last question asks the user to select a word (which is selected randomly from the movie titles). Then, the user will recieve movie recommendations based on their selections. We have filtered the movie options that the quiz will recommend to the user movies that were released after 1990, have over 1000 ratings, and have over 7 stars in the rating. These filters were implemented with the purpose of quality control in the movie recommendations.
+The user can recieve movie recommendations through both the quiz button and the "I'm Feeling Lucky!" button in the top left hand corner. The quiz will have four questions. The first two ask the user to select a movie, the third question will ask the user to select a year, and the last question asks the user to select a word (which is selected randomly from the movie titles). Then, the user will recieve movie recommendations based on their selections. We have filtered the movie options that the quiz will recommend to the user movies that were released after 1990, have over 1000 ratings, and have a rating over 7 stars. These filters were implemented with the purpose of quality control in the movie recommendations.
 
 The "I'm Feeling Lucky!" button generates a random movie recommendation from all the movies in the database. 
 
